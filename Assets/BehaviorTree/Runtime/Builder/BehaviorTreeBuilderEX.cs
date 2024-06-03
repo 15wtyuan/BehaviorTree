@@ -84,20 +84,6 @@ namespace BehaviorTree.Runtime
             return Do("action", action);
         }
 
-        public BehaviorTreeBuilder WaitTime(string name, float time = 1f)
-        {
-            return AddNode(new WaitTime(new TimeMonitor())
-            {
-                Name = name,
-                Time = time
-            });
-        }
-
-        public BehaviorTreeBuilder WaitTime(float time = 1f)
-        {
-            return WaitTime("Wait Time", time);
-        }
-
         public BehaviorTreeBuilder Condition(string name, Func<bool> action)
         {
             return AddNode(new Condition
@@ -112,31 +98,45 @@ namespace BehaviorTree.Runtime
             return Condition("condition", action);
         }
 
-        public BehaviorTreeBuilder RandomProbability(string name, float successProbability, int seed = 0)
+        public BehaviorTreeBuilder RandomProbability(string name, object successProbability, object seed)
         {
             return AddNode(new RandomProbability
             {
                 Name = name,
-                SuccessProbability = successProbability,
-                Seed = seed
+                SuccessProbability = (SharedFloat)successProbability,
+                Seed = (SharedInt)seed
             });
         }
 
-        public BehaviorTreeBuilder RandomProbability(float successProbability, int seed = 0)
+        public BehaviorTreeBuilder RandomProbability(object successProbability, object seed)
         {
             return RandomProbability("Random Probability", successProbability, seed);
         }
 
-        public BehaviorTreeBuilder Wait(string name, int turns = 1)
+        public BehaviorTreeBuilder WaitTime(string name, object time)
+        {
+            return AddNode(new WaitTime(new TimeMonitor())
+            {
+                Name = name,
+                Time = (SharedFloat)time
+            });
+        }
+
+        public BehaviorTreeBuilder WaitTime(object time)
+        {
+            return WaitTime("Wait Time", time);
+        }
+
+        public BehaviorTreeBuilder Wait(string name, object turns)
         {
             return AddNode(new Wait
             {
                 Name = name,
-                Turns = turns
+                Turns = (SharedInt)turns
             });
         }
 
-        public BehaviorTreeBuilder Wait(int turns = 1)
+        public BehaviorTreeBuilder Wait(object turns)
         {
             return Wait("wait", turns);
         }

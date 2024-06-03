@@ -8,10 +8,9 @@
     [TaskIcon("Hourglass.png")]
     public class WaitTime : ActionBase
     {
-        private ITimeMonitor _timeMonitor;
+        public SharedFloat Time;
+        private readonly ITimeMonitor _timeMonitor;
         private float _timePassed;
-
-        public float Time = 1;
 
         public WaitTime(ITimeMonitor timeMonitor)
         {
@@ -27,7 +26,7 @@
         {
             _timePassed += _timeMonitor.DeltaTime;
 
-            if (_timePassed < Time)
+            if (_timePassed < Time.Value)
             {
                 return TaskStatus.Continue;
             }

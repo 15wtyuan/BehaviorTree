@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace BehaviorTree.Runtime
 {
@@ -7,6 +6,7 @@ namespace BehaviorTree.Runtime
     {
         private readonly BehaviorTree _tree;
         private readonly List<TaskParentBase> _pointers = new();
+        private readonly Blackboard _sharedBlackboard;
 
         private TaskParentBase PointerCurrent
         {
@@ -17,9 +17,10 @@ namespace BehaviorTree.Runtime
             }
         }
 
-        public BehaviorTreeBuilder(GameObject owner)
+        public BehaviorTreeBuilder(Blackboard sharedBlackboard)
         {
-            _tree = new BehaviorTree(owner);
+            _sharedBlackboard = sharedBlackboard;
+            _tree = new BehaviorTree(sharedBlackboard);
             _pointers.Add(_tree.Root);
         }
 

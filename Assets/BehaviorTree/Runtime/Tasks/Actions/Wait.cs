@@ -3,7 +3,7 @@
     [TaskIcon("HourglassFill.png")]
     public class Wait : ActionBase
     {
-        public int Turns = 1;
+        public SharedInt Turns;
         private int _ticks;
 
         protected override void OnStart()
@@ -13,7 +13,7 @@
 
         protected override TaskStatus OnUpdate()
         {
-            if (_ticks >= Turns) return TaskStatus.Success;
+            if (_ticks >= Turns.Value) return TaskStatus.Success;
             _ticks++;
             return TaskStatus.Continue;
         }

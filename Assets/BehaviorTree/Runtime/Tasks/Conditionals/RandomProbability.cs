@@ -4,26 +4,26 @@ namespace BehaviorTree.Runtime
 {
     public class RandomProbability : ConditionBase
     {
-        public float SuccessProbability;
-        public int Seed;
+        public  SharedFloat SuccessProbability;
+        public  SharedInt Seed;
 
         protected override bool GetCondition()
         {
             var oldState = Random.state;
 
-            if (Seed != 0)
+            if (Seed.Value != 0)
             {
-                Random.InitState(Seed);
+                Random.InitState(Seed.Value);
             }
 
             var randomValue = Random.value;
 
-            if (Seed != 0)
+            if (Seed.Value != 0)
             {
                 Random.state = oldState;
             }
 
-            return randomValue < SuccessProbability;
+            return randomValue < SuccessProbability.Value;
         }
     }
 }

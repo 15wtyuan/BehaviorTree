@@ -16,8 +16,10 @@ namespace BehaviorTree.Samples
         [SerializeField]
         private bool _condition = false;
 
-        private void Awake () {
-            _treeA = new BehaviorTreeBuilder(gameObject)
+        private void Awake ()
+        {
+            var sharedBlackboard = new Blackboard();
+            _treeA = new BehaviorTreeBuilder(sharedBlackboard)
                 .Sequence()
                     .Condition("Custom Condition", () => true)
                     .Do("Custom Action A", () => TaskStatus.Success)
@@ -40,7 +42,7 @@ namespace BehaviorTree.Samples
                 .End()
                 .Build();
 
-            _treeB = new BehaviorTreeBuilder(gameObject)
+            _treeB = new BehaviorTreeBuilder(sharedBlackboard)
                 .Name("Basic")
                 .Sequence()
                     .Condition("Custom Condition", () => _condition)
@@ -48,7 +50,7 @@ namespace BehaviorTree.Samples
                 .End()
                 .Build();
 
-            _treeC = new BehaviorTreeBuilder(gameObject)
+            _treeC = new BehaviorTreeBuilder(sharedBlackboard)
                 .Name("Basic")
                 .Sequence()
                     .Condition("Custom Condition", () => _condition)

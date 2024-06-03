@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace BehaviorTree.Runtime
+﻿namespace BehaviorTree.Runtime
 {
     public abstract class TaskBase
     {
@@ -17,7 +15,7 @@ namespace BehaviorTree.Runtime
         public string Name { get; set; }
 
         public bool Enabled { get; set; } = true;
-        public GameObject Owner { get; set; }
+        public Blackboard SharedBlackboard { get; set; }
         public IBehaviorTree Tree { get; set; }
 
         public virtual TaskStatus Update()

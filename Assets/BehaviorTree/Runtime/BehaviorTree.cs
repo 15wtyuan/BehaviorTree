@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace BehaviorTree.Runtime
 {
@@ -16,7 +15,7 @@ namespace BehaviorTree.Runtime
     [System.Serializable]
     public class BehaviorTree : IBehaviorTree
     {
-        private readonly GameObject _owner;
+        private readonly Blackboard _sharedBlackboard;
         private readonly List<TaskBase> _tasks = new List<TaskBase>();
 
         public int TickCount { get; private set; }
@@ -25,9 +24,9 @@ namespace BehaviorTree.Runtime
         public TaskRoot Root { get; } = new TaskRoot();
         public IReadOnlyList<TaskBase> ActiveTasks => _tasks;
 
-        public BehaviorTree(GameObject owner)
+        public BehaviorTree(Blackboard sharedBlackboard)
         {
-            _owner = owner;
+            _sharedBlackboard = sharedBlackboard;
             SyncNodes(Root);
         }
 
@@ -57,7 +56,7 @@ namespace BehaviorTree.Runtime
         {
             parent.AddChild(child);
             child.Tree = this;
-            child.Owner = _owner;
+            child.SharedBlackboard = _sharedBlackboard;
         }
 
         public void Splice(TaskParentBase parent, BehaviorTree tree)
@@ -69,12 +68,12 @@ namespace BehaviorTree.Runtime
 
         private void SyncNodes(TaskParentBase taskParent)
         {
-            taskParent.Owner = _owner;
+            taskParent.SharedBlackboard = _sharedBlackboard;
             taskParent.Tree = this;
 
             foreach (var child in taskParent.Children)
             {
-                child.Owner = _owner;
+                child.SharedBlackboard = _sharedBlackboard;
                 child.Tree = this;
 
                 if (child is TaskParentBase parent)
