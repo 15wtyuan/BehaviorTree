@@ -4,13 +4,10 @@
     {
         public TaskBase Child => Children.Count > 0 ? Children[0] : null;
 
-        public override void End()
+        protected override void OnExit()
         {
+            base.OnExit();
             Child.End();
-        }
-
-        protected override void Reset()
-        {
         }
 
         public override TaskParentBase AddChild(TaskBase child)

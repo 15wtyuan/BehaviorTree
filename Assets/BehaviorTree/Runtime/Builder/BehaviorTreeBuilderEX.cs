@@ -50,6 +50,17 @@ namespace BehaviorTree.Runtime
             return ParentTask<RepeatForever>(name);
         }
 
+        public BehaviorTreeBuilder EventBreak(string name, object eventType)
+        {
+            var eventBreak = new EventBreak
+            {
+                Name = name,
+                EventType = (SharedString)eventType
+            };
+
+            return AddNodeWithPointer(eventBreak);
+        }
+
         public BehaviorTreeBuilder Sequence(string name = "sequence")
         {
             return ParentTask<Sequence>(name);

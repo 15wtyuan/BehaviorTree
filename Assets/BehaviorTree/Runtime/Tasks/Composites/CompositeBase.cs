@@ -4,7 +4,7 @@
     {
         public int ChildIndex { get; protected set; }
 
-        public override void End()
+        protected override void OnExit()
         {
             if (ChildIndex < Children.Count)
             {
@@ -12,7 +12,7 @@
             }
         }
 
-        protected override void Reset()
+        protected override void OnReset()
         {
             ChildIndex = 0;
         }
