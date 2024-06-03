@@ -140,5 +140,47 @@ namespace BehaviorTree.Runtime
         {
             return Wait("wait", turns);
         }
+
+        public BehaviorTreeBuilder Log(string name, object text)
+        {
+            return AddNode(new Log
+            {
+                Name = name,
+                Text = (SharedString)text
+            });
+        }
+
+        public BehaviorTreeBuilder Log(object text)
+        {
+            return Log("log", text);
+        }
+
+        public BehaviorTreeBuilder SendEvent(string name, object eventType)
+        {
+            return AddNode(new SendEvent
+            {
+                Name = name,
+                EventType = (SharedString)eventType
+            });
+        }
+
+        public BehaviorTreeBuilder SendEvent(object eventType)
+        {
+            return SendEvent("SendEvent", eventType);
+        }
+
+        public BehaviorTreeBuilder WaitEvent(string name, object eventType)
+        {
+            return AddNode(new WaitEvent
+            {
+                Name = name,
+                EventType = (SharedString)eventType
+            });
+        }
+
+        public BehaviorTreeBuilder WaitEvent(object eventType)
+        {
+            return WaitEvent("WaitEvent", eventType);
+        }
     }
 }

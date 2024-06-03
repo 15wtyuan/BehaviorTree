@@ -23,6 +23,10 @@
         protected virtual void OnExit()
         {
         }
+        
+        protected virtual void OnReset()
+        {
+        }
 
         #endregion
 
@@ -81,6 +85,8 @@
             _active = false;
             _start = false;
             _exit = false;
+
+            OnReset();
         }
 
         public override void End()

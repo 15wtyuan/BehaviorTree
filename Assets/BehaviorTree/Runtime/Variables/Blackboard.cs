@@ -5,7 +5,9 @@ namespace BehaviorTree.Runtime
 {
     public class Blackboard
     {
-        private Dictionary<string, SharedVariable> _data = new();
+        private readonly Dictionary<string, SharedVariable> _data = new();
+
+        private readonly Dictionary<string, EventSubject> _events = new();
 
         public void Set<T>(string key, object value) where T : SharedVariable
         {
@@ -28,6 +30,33 @@ namespace BehaviorTree.Runtime
             }
 
             throw new ArgumentNullException($"key:{key} not found");
+        }
+
+        public void AddObserver(string eventType, IEventObserver observer)
+        {
+            if (!_events.TryGetValue(eventType, out var subject))
+            {
+                subject = new EventSubject(eventType);
+                _events[eventType] = subject;
+            }
+
+            subject.AddObserver(observer);
+        }
+
+        public void RemoveObserver(string eventType, IEventObserver observer)
+        {
+            if (_events.TryGetValue(eventType, out var subject))
+            {
+                subject.RemoveObserver(observer);
+            }
+        }
+
+        public void SendEvent(string eventType)
+        {
+            if (_events.TryGetValue(eventType, out var subject))
+            {
+                subject.NotifyAllObservers();
+            }
         }
     }
 }

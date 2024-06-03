@@ -9,12 +9,10 @@
             {
                 var child = Children[ChildIndex];
 
-                switch (child.Update())
+                var status = child.Update();
+                if (status != TaskStatus.Failure)
                 {
-                    case TaskStatus.Success:
-                        return TaskStatus.Success;
-                    case TaskStatus.Continue:
-                        return TaskStatus.Continue;
+                    return status;
                 }
 
                 ChildIndex++;
