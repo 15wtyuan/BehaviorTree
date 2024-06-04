@@ -7,7 +7,7 @@ namespace BehaviorTree.Runtime
         private bool _init;
         private bool _start;
         private bool _exit;
-        private int _lastTickCount;
+        private int _lastRoundCount;
 
         public List<TaskBase> Children { get; } = new();
 
@@ -38,7 +38,7 @@ namespace BehaviorTree.Runtime
         public override TaskStatus Update()
         {
             base.Update();
-            UpdateTicks();
+            UpdateRound();
 
             if (!_init)
             {
@@ -63,19 +63,19 @@ namespace BehaviorTree.Runtime
             return status;
         }
 
-        private void UpdateTicks()
+        private void UpdateRound()
         {
             if (Tree == null)
             {
                 return;
             }
 
-            if (_lastTickCount != Tree.TickCount)
+            if (_lastRoundCount != Tree.RoundCount)
             {
                 Reset();
             }
 
-            _lastTickCount = Tree.TickCount;
+            _lastRoundCount = Tree.RoundCount;
         }
 
         public virtual TaskParentBase AddChild(TaskBase child)

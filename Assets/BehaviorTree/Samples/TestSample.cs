@@ -55,6 +55,8 @@ namespace BehaviorTree.Samples
                 .End()
                 .Build();
             // @formatter:on
+
+            tree.Start(true);
         }
 
         private void Update()

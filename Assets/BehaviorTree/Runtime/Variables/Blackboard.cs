@@ -57,13 +57,15 @@ namespace BehaviorTree.Runtime
                 subject.NotifyAllObservers();
             }
         }
+
         public string GetSharedVariablePrint()
         {
-            string sharedStr = "";
+            var sharedStr = "";
             foreach (var item in _data)
             {
-                sharedStr += string.Format("share:{0}.{1}  /n", item.Key, item.Value.GetValue());
+                sharedStr += $"share:{item.Key}.{item.Value.GetValue()}  /n";
             }
+
             return sharedStr;
         }
     }

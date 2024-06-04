@@ -6,7 +6,7 @@ namespace BehaviorTree.Runtime
     {
         string Name { get; }
         TaskRoot Root { get; }
-        int TickCount { get; }
+        int RoundCount { get; }
 
         void AddActiveTask(TaskBase task);
         void RemoveActiveTask(TaskBase task);
@@ -18,13 +18,15 @@ namespace BehaviorTree.Runtime
     public class BehaviorTree : IBehaviorTree
     {
         private readonly Blackboard _sharedBlackboard;
-        private readonly List<TaskBase> _tasks = new List<TaskBase>();
+        private readonly List<TaskBase> _activeTasks = new();
+        private TreeStatus _status = TreeStatus.End;
+        private bool _loop;
 
-        public int TickCount { get; private set; }
+        public int RoundCount { get; private set; }
 
         public string Name { get; set; }
-        public TaskRoot Root { get; } = new TaskRoot();
-        public IReadOnlyList<TaskBase> ActiveTasks => _tasks;
+        public TaskRoot Root { get; } = new();
+        public IReadOnlyList<TaskBase> ActiveTasks => _activeTasks;
 
         public BehaviorTree(Blackboard sharedBlackboard)
         {
@@ -32,26 +34,63 @@ namespace BehaviorTree.Runtime
             SyncNodes(Root);
         }
 
+        public void Start(bool loop = false)
+        {
+            if (_status != TreeStatus.End)
+            {
+                return;
+            }
+
+            _status = TreeStatus.Running;
+            _loop = loop;
+        }
+
         public TaskStatus Tick()
         {
+            if (_status != TreeStatus.Running)
+            {
+                return TaskStatus.Failure;
+            }
+
             var status = Root.Update();
             if (status != TaskStatus.Continue)
             {
-                Reset();
+                End(true);
             }
 
             return status;
         }
 
-        public void Reset()
+        public void Stop()
         {
-            foreach (var task in _tasks)
+            End(false);
+        }
+
+        private void End(bool checkLoop)
+        {
+            if (_status == TreeStatus.End)
+            {
+                return;
+            }
+
+            _status = TreeStatus.End;
+            Reset();
+
+            if (_loop && checkLoop)
+            {
+                Start(_loop);
+            }
+        }
+
+        private void Reset()
+        {
+            foreach (var task in _activeTasks)
             {
                 task.End();
             }
 
-            _tasks.Clear();
-            TickCount++;
+            _activeTasks.Clear();
+            RoundCount++;
         }
 
         public void AddNode(TaskParentBase parent, TaskBase child)
@@ -87,17 +126,17 @@ namespace BehaviorTree.Runtime
 
         public void AddActiveTask(TaskBase task)
         {
-            _tasks.Add(task);
+            _activeTasks.Add(task);
         }
 
         public void RemoveActiveTask(TaskBase task)
         {
-            _tasks.Remove(task);
+            _activeTasks.Remove(task);
         }
 
         public string GetSharedBlackboardPrint()
         {
-            return  _sharedBlackboard.GetSharedVariablePrint();
+            return _sharedBlackboard.GetSharedVariablePrint();
         }
     }
 }
