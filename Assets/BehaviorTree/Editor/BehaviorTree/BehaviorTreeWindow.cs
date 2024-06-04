@@ -8,7 +8,7 @@ namespace BehaviorTree.Editors
     {
         private BehaviorTreePrinter _printer;
         private string _name;
-
+        private IBehaviorTree _tree;
         public static void ShowTree(IBehaviorTree tree, string name)
         {
             var window = GetWindow<BehaviorTreeWindow>(false);
@@ -21,6 +21,7 @@ namespace BehaviorTree.Editors
             _printer?.Unbind();
             _printer = new BehaviorTreePrinter(tree, position.size);
             _name = name;
+            _tree = tree;
         }
 
         private void OnGUI()
@@ -31,6 +32,10 @@ namespace BehaviorTree.Editors
             }
 
             GUILayout.Label($"Behavior Tree: {_name}", EditorStyles.boldLabel);
+            if (_tree != null)
+            {
+                GUILayout.Label($"SharedBlackboardPrint: {_tree.GetSharedBlackboardPrint()}", EditorStyles.boldLabel);
+            }
             _printer?.Print(position.size);
         }
 

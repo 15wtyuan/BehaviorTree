@@ -9,7 +9,7 @@ namespace BehaviorTree.Runtime
 
         private readonly Dictionary<string, EventSubject> _events = new();
 
-        public void Set<T>(string key, object value) where T : SharedVariable
+        public void Set<T>(string key, T value) where T : SharedVariable
         {
             if (_data.TryGetValue(key, out var oldValue))
             {
@@ -17,8 +17,7 @@ namespace BehaviorTree.Runtime
             }
             else
             {
-                var newValue = (T)value;
-                _data[key] = newValue;
+                _data[key] = value;
             }
         }
 
@@ -57,6 +56,15 @@ namespace BehaviorTree.Runtime
             {
                 subject.NotifyAllObservers();
             }
+        }
+        public string GetSharedVariablePrint()
+        {
+            string sharedStr = "";
+            foreach (var item in _data)
+            {
+                sharedStr += string.Format("share:{0}.{1}  /n", item.Key, item.Value.GetValue());
+            }
+            return sharedStr;
         }
     }
 }

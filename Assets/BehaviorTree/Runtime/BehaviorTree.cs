@@ -10,6 +10,8 @@ namespace BehaviorTree.Runtime
 
         void AddActiveTask(TaskBase task);
         void RemoveActiveTask(TaskBase task);
+
+        string GetSharedBlackboardPrint();
     }
 
     [System.Serializable]
@@ -91,6 +93,11 @@ namespace BehaviorTree.Runtime
         public void RemoveActiveTask(TaskBase task)
         {
             _tasks.Remove(task);
+        }
+
+        public string GetSharedBlackboardPrint()
+        {
+            return  _sharedBlackboard.GetSharedVariablePrint();
         }
     }
 }
