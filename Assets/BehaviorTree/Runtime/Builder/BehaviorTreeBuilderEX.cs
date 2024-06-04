@@ -50,12 +50,17 @@ namespace BehaviorTree.Runtime
             return ParentTask<RepeatForever>(name);
         }
 
-        public BehaviorTreeBuilder EventBreak(string name, object eventType)
+        public BehaviorTreeBuilder EventBreak(SharedString eventType)
+        {
+            return EventBreak("EventBreak", eventType);
+        }
+
+        public BehaviorTreeBuilder EventBreak(string name, SharedString eventType)
         {
             var eventBreak = new EventBreak
             {
                 Name = name,
-                EventType = (SharedString)eventType
+                EventType = eventType
             };
 
             return AddNodeWithPointer(eventBreak);
@@ -79,6 +84,11 @@ namespace BehaviorTree.Runtime
         public BehaviorTreeBuilder Parallel(string name = "parallel")
         {
             return ParentTask<Parallel>(name);
+        }
+
+        public BehaviorTreeBuilder ParallelSelector(string name = "ParallelSelector")
+        {
+            return ParentTask<ParallelSelector>(name);
         }
 
         public BehaviorTreeBuilder Do(string name, Func<TaskStatus> action)
@@ -109,87 +119,87 @@ namespace BehaviorTree.Runtime
             return Condition("condition", action);
         }
 
-        public BehaviorTreeBuilder RandomProbability(string name, object successProbability, object seed)
+        public BehaviorTreeBuilder RandomProbability(string name, SharedFloat successProbability, SharedInt seed)
         {
             return AddNode(new RandomProbability
             {
                 Name = name,
-                SuccessProbability = (SharedFloat)successProbability,
-                Seed = (SharedInt)seed
+                SuccessProbability = successProbability,
+                Seed = seed
             });
         }
 
-        public BehaviorTreeBuilder RandomProbability(object successProbability, object seed)
+        public BehaviorTreeBuilder RandomProbability(SharedFloat successProbability, SharedInt seed)
         {
             return RandomProbability("Random Probability", successProbability, seed);
         }
 
-        public BehaviorTreeBuilder WaitTime(string name, object time)
+        public BehaviorTreeBuilder WaitTime(string name, SharedFloat time)
         {
             return AddNode(new WaitTime(new TimeMonitor())
             {
                 Name = name,
-                Time = (SharedFloat)time
+                Time = time
             });
         }
 
-        public BehaviorTreeBuilder WaitTime(object time)
+        public BehaviorTreeBuilder WaitTime(SharedFloat time)
         {
             return WaitTime("Wait Time", time);
         }
 
-        public BehaviorTreeBuilder Wait(string name, object turns)
+        public BehaviorTreeBuilder Wait(string name, SharedInt turns)
         {
             return AddNode(new Wait
             {
                 Name = name,
-                Turns = (SharedInt)turns
+                Turns = turns
             });
         }
 
-        public BehaviorTreeBuilder Wait(object turns)
+        public BehaviorTreeBuilder Wait(SharedInt turns)
         {
             return Wait("wait", turns);
         }
 
-        public BehaviorTreeBuilder Log(string name, object text)
+        public BehaviorTreeBuilder Log(string name, SharedString text)
         {
             return AddNode(new Log
             {
                 Name = name,
-                Text = (SharedString)text
+                Text = text
             });
         }
 
-        public BehaviorTreeBuilder Log(object text)
+        public BehaviorTreeBuilder Log(SharedString text)
         {
             return Log("log", text);
         }
 
-        public BehaviorTreeBuilder SendEvent(string name, object eventType)
+        public BehaviorTreeBuilder SendEvent(string name, SharedString eventType)
         {
             return AddNode(new SendEvent
             {
                 Name = name,
-                EventType = (SharedString)eventType
+                EventType = eventType
             });
         }
 
-        public BehaviorTreeBuilder SendEvent(object eventType)
+        public BehaviorTreeBuilder SendEvent(SharedString eventType)
         {
             return SendEvent("SendEvent", eventType);
         }
 
-        public BehaviorTreeBuilder WaitEvent(string name, object eventType)
+        public BehaviorTreeBuilder WaitEvent(string name, SharedString eventType)
         {
             return AddNode(new WaitEvent
             {
                 Name = name,
-                EventType = (SharedString)eventType
+                EventType = eventType
             });
         }
 
-        public BehaviorTreeBuilder WaitEvent(object eventType)
+        public BehaviorTreeBuilder WaitEvent(SharedString eventType)
         {
             return WaitEvent("WaitEvent", eventType);
         }

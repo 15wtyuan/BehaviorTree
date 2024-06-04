@@ -2,8 +2,7 @@
 
 namespace BehaviorTree.Runtime
 {
-    [TaskIcon("CompareArrows.png")]
-    public class Parallel : CompositeBase
+    public class ParallelSelector : CompositeBase
     {
         private readonly Dictionary<TaskBase, TaskStatus> _childStatus = new();
 
@@ -43,16 +42,16 @@ namespace BehaviorTree.Runtime
                 }
             }
 
-            if (successCount == Children.Count)
-            {
-                End();
-                return TaskStatus.Success;
-            }
-
-            if (failureCount > 0)
+            if (failureCount == Children.Count)
             {
                 End();
                 return TaskStatus.Failure;
+            }
+
+            if (successCount > 0)
+            {
+                End();
+                return TaskStatus.Success;
             }
 
             return TaskStatus.Continue;
