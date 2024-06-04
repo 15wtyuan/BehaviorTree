@@ -6,7 +6,7 @@
 
         protected override TaskStatus OnUpdate()
         {
-            UnityEngine.Debug.Log(Text);
+            UnityEngine.Debug.Log(Text.Value);
             return TaskStatus.Success;
         }
     }
