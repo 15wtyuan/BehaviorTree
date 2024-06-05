@@ -1,7 +1,17 @@
-﻿namespace BehaviorTree.Runtime
+﻿using System.Collections.Generic;
+
+namespace BehaviorTree.Runtime
 {
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder Selector(this BehaviorTreeBuilder builder, string name = "Selector")
+        {
+            return builder.ParentTask<Selector>(name);
+        }
+    }
+
     [TaskIcon("LinearScale.png")]
-    public class Selector : CompositeBase
+    public class Selector : CompositeBase, IJsonDeserializer
     {
         protected override TaskStatus OnUpdate()
         {
@@ -19,6 +29,11 @@
             }
 
             return TaskStatus.Failure;
+        }
+
+        public void BuildFromJson(Dictionary<string, object> jsonData)
+        {
+            Name = (string)jsonData["title"];
         }
     }
 }

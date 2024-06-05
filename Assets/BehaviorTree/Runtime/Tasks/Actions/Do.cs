@@ -2,6 +2,25 @@
 
 namespace BehaviorTree.Runtime
 {
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder Do(this BehaviorTreeBuilder builder, string name,
+            Func<TaskStatus> action)
+        {
+            return builder.AddNode(new Do
+            {
+                Name = name,
+                UpdateLogic = action
+            });
+        }
+
+        public static BehaviorTreeBuilder Do(this BehaviorTreeBuilder builder,
+            Func<TaskStatus> action)
+        {
+            return builder.Do("Do", action);
+        }
+    }
+
     public class Do : ActionBase
     {
         public Func<TaskStatus> UpdateLogic;

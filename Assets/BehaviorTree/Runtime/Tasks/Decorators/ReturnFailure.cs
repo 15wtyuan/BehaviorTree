@@ -1,7 +1,18 @@
-﻿namespace BehaviorTree.Runtime
+﻿using System.Collections.Generic;
+
+namespace BehaviorTree.Runtime
 {
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder ReturnFailure(this BehaviorTreeBuilder builder,
+            string name = "Return Failure")
+        {
+            return builder.ParentTask<ReturnFailure>(name);
+        }
+    }
+
     [TaskIcon("Cancel.png")]
-    public class ReturnFailure : DecoratorBase
+    public class ReturnFailure : DecoratorBase, IJsonDeserializer
     {
         protected override TaskStatus OnUpdate()
         {
@@ -12,6 +23,11 @@
             }
 
             return TaskStatus.Failure;
+        }
+
+        public void BuildFromJson(Dictionary<string, object> jsonData)
+        {
+            Name = (string)jsonData["title"];
         }
     }
 }

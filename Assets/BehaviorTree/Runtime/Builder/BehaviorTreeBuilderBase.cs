@@ -30,14 +30,14 @@ namespace BehaviorTree.Runtime
             return this;
         }
 
-        private BehaviorTreeBuilder ParentTask<T>(string name) where T : TaskParentBase, new()
+        public BehaviorTreeBuilder ParentTask<T>(string name) where T : TaskParentBase, new()
         {
             var parent = new T { Name = name };
 
             return AddNodeWithPointer(parent);
         }
 
-        private BehaviorTreeBuilder AddNodeWithPointer(TaskParentBase task)
+        public BehaviorTreeBuilder AddNodeWithPointer(TaskParentBase task)
         {
             AddNode(task);
             _pointers.Add(task);
@@ -45,7 +45,7 @@ namespace BehaviorTree.Runtime
             return this;
         }
 
-        private BehaviorTreeBuilder AddNode(TaskBase node)
+        public BehaviorTreeBuilder AddNode(TaskBase node)
         {
             _tree.AddNode(PointerCurrent, node);
             return this;

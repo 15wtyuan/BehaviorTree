@@ -6,27 +6,30 @@ namespace BehaviorTree.Samples
     public class TestSample : MonoBehaviour
     {
         public bool isAirborne;
-        [SerializeField] private Runtime.BehaviorTree tree;
+        [SerializeField] private Runtime.BehaviorTree treeA;
+        [SerializeField] private Runtime.BehaviorTree treeB;
 
-        private Blackboard _sharedBlackboard;
+        private Blackboard _sharedBlackboardA;
+        private Blackboard _sharedBlackboardB;
 
         private void Awake()
         {
             //英雄：索敌，有敌人，先靠近敌人，再发动攻击，攻击的同时如果有技能就释放技能。如果被击飞了，就从头再来
-            _sharedBlackboard = new Blackboard();
+            _sharedBlackboardA = new Blackboard();
+            _sharedBlackboardB = new Blackboard();
             
             // @formatter:off
-            tree = new BehaviorTreeBuilder(_sharedBlackboard)
+            treeA = new BehaviorTreeBuilder(_sharedBlackboardA)
                 .Sequence()
                     .RepeatUntilSuccess()
                         .Sequence()
                             .Log("索敌中")
-                            .WaitTime(2)
+                            .Wait(2000)
                             .RandomProbability(0.5f,0)//50%索敌成功
                         .End()
                     .End()
                     .Log("索敌成功，走向怪物")
-                    .WaitTime(2)
+                    .Wait(2000)
                     .ParallelSelector()
                         .Inverter("发动攻击")
                             .RepeatUntilFailure()
@@ -35,11 +38,11 @@ namespace BehaviorTree.Samples
                                         .Sequence()
                                             .RandomProbability(0.1f,0)//10%放技能
                                             .Log("放技能")
-                                            .WaitTime(2)
+                                            .Wait(2000)
                                         .End()
                                         .Sequence()
                                             .Log("普攻")
-                                            .WaitTime(2)
+                                            .Wait(2000)
                                         .End()
                                     .End()
                                 .End()
@@ -49,25 +52,35 @@ namespace BehaviorTree.Samples
                             .WaitEvent("Airborne")
                             .SendEvent("StopAttack")
                             .Log("被击飞")
-                            .WaitTime(2)
+                            .Wait(2000)
                         .End()
                     .End()
                 .End()
                 .Build();
             // @formatter:on
+            treeA.Start(true);
 
-            tree.Start(true);
+
+            const string jsonFilePath = "JsonSamples";
+            var jsonTextAsset = Resources.Load<TextAsset>(jsonFilePath);
+            var jsonFileContent = jsonTextAsset.text;
+            treeB = new BehaviorTreeBuilder(_sharedBlackboardB)
+                .AddTreeFromJson(jsonFileContent)
+                .Build();
+            // treeB.Start(true);
         }
 
         private void Update()
         {
             if (isAirborne)
             {
-                _sharedBlackboard.SendEvent("Airborne");
+                _sharedBlackboardA.SendEvent("Airborne");
+                _sharedBlackboardB.SendEvent("Airborne");
                 isAirborne = false;
             }
 
-            tree.Tick();
+            treeA.Tick();
+            treeB.Tick();
         }
     }
 }

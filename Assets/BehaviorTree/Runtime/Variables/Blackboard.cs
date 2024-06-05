@@ -63,7 +63,7 @@ namespace BehaviorTree.Runtime
             var sharedStr = "";
             foreach (var item in _data)
             {
-                sharedStr += $"share:{item.Key}.{item.Value.GetValue()}  /n";
+                sharedStr += $"{item.Key}:{item.Value.GetValue()}  \n";
             }
 
             return sharedStr;

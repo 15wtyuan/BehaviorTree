@@ -1,0 +1,434 @@
+{
+  "version": "0.3.0",
+  "scope": "tree",
+  "id": "98ab8fc7-5515-44a4-85df-7a334141a417",
+  "title": "testTree",
+  "description": "",
+  "root": "c1ea2eaf-83d9-439c-a2d5-ac11a3afbf57",
+  "properties": {
+    "Int_SkillId": 10001
+  },
+  "nodes": {
+    "c1ea2eaf-83d9-439c-a2d5-ac11a3afbf57": {
+      "id": "c1ea2eaf-83d9-439c-a2d5-ac11a3afbf57",
+      "name": "Sequence",
+      "title": "Sequence",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": -132,
+        "y": -72
+      },
+      "children": [
+        "3531af65-2219-4558-8a71-9ce61052ee1a",
+        "2b059a6f-b341-4f5b-8790-e9502d4a7454",
+        "a99d1114-bf3d-4d2d-87e7-e9913d743608",
+        "3198ff3f-6076-45c0-a222-6c914cb55519"
+      ]
+    },
+    "3531af65-2219-4558-8a71-9ce61052ee1a": {
+      "id": "3531af65-2219-4558-8a71-9ce61052ee1a",
+      "name": "RepeatUntilSuccess",
+      "title": "Repeat Until Success",
+      "description": "",
+      "properties": {
+        "maxLoop": -1
+      },
+      "display": {
+        "x": -408,
+        "y": 72
+      },
+      "child": "291092ff-e496-4ece-a0b0-db906a71b535"
+    },
+    "291092ff-e496-4ece-a0b0-db906a71b535": {
+      "id": "291092ff-e496-4ece-a0b0-db906a71b535",
+      "name": "Sequence",
+      "title": "Sequence",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": -408,
+        "y": 180
+      },
+      "children": [
+        "5ed34b74-b0e7-431f-9332-316edfa00c2e",
+        "49c7d2ce-a7c2-4cfe-9c38-6e987ae9434a",
+        "82b69f2c-6808-4733-824e-b879fa94c5bd"
+      ]
+    },
+    "49c7d2ce-a7c2-4cfe-9c38-6e987ae9434a": {
+      "id": "49c7d2ce-a7c2-4cfe-9c38-6e987ae9434a",
+      "name": "Wait",
+      "title": "Wait <milliseconds>ms",
+      "description": "",
+      "properties": {
+        "milliseconds": 2000
+      },
+      "display": {
+        "x": -276,
+        "y": 300
+      }
+    },
+    "a99d1114-bf3d-4d2d-87e7-e9913d743608": {
+      "id": "a99d1114-bf3d-4d2d-87e7-e9913d743608",
+      "name": "Wait",
+      "title": "Wait <milliseconds>ms",
+      "description": "",
+      "properties": {
+        "milliseconds": 2000
+      },
+      "display": {
+        "x": 108,
+        "y": 72
+      }
+    },
+    "3198ff3f-6076-45c0-a222-6c914cb55519": {
+      "id": "3198ff3f-6076-45c0-a222-6c914cb55519",
+      "name": "ParallelSelector",
+      "title": "ParallelSelector",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 336,
+        "y": 72
+      },
+      "children": [
+        "6d2adbff-34f2-4e55-b8fb-4462e0a40139",
+        "7da0c001-905f-4d94-84ae-00b086d39a21"
+      ]
+    },
+    "7da0c001-905f-4d94-84ae-00b086d39a21": {
+      "id": "7da0c001-905f-4d94-84ae-00b086d39a21",
+      "name": "Sequence",
+      "title": "Sequence",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 648,
+        "y": 216
+      },
+      "children": [
+        "391c34c3-3417-4b32-b7fe-e266589b1d50",
+        "7a0213b7-ecba-4851-8288-a080081b7ae9",
+        "a5e3b57f-13fe-4e4b-9398-726a59b9e51d",
+        "e66b0fe0-1e38-4873-8731-f2b58339ab34"
+      ]
+    },
+    "6d2adbff-34f2-4e55-b8fb-4462e0a40139": {
+      "id": "6d2adbff-34f2-4e55-b8fb-4462e0a40139",
+      "name": "Inverter",
+      "title": "Inverter",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 216,
+        "y": 228
+      },
+      "child": "2848b4e3-24a9-40dd-88a8-9dd39d9b052e"
+    },
+    "2848b4e3-24a9-40dd-88a8-9dd39d9b052e": {
+      "id": "2848b4e3-24a9-40dd-88a8-9dd39d9b052e",
+      "name": "RepeatUntilFailure",
+      "title": "Repeat Until Failure",
+      "description": "",
+      "properties": {
+        "maxLoop": -1
+      },
+      "display": {
+        "x": 216,
+        "y": 372
+      },
+      "child": "24563295-07ec-4c6a-981e-e398b1b78a64"
+    },
+    "ade037ce-b62e-4b14-8231-22a619ce726b": {
+      "id": "ade037ce-b62e-4b14-8231-22a619ce726b",
+      "name": "Selector",
+      "title": "Selector",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 216,
+        "y": 648
+      },
+      "children": [
+        "91a1dbfa-6c6b-4d5c-82ba-234151edb669",
+        "cde206fd-754a-4727-8c98-c4d288af47da"
+      ]
+    },
+    "91a1dbfa-6c6b-4d5c-82ba-234151edb669": {
+      "id": "91a1dbfa-6c6b-4d5c-82ba-234151edb669",
+      "name": "Sequence",
+      "title": "Sequence",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 24,
+        "y": 792
+      },
+      "children": [
+        "c248ecf1-591e-4ab8-8fed-f8e49a5f119b",
+        "9364c07e-fed9-478d-8093-4db42c235f4a",
+        "3af555fd-7c57-4cba-a9c6-e31c060668d7"
+      ]
+    },
+    "cde206fd-754a-4727-8c98-c4d288af47da": {
+      "id": "cde206fd-754a-4727-8c98-c4d288af47da",
+      "name": "Sequence",
+      "title": "Sequence",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 372,
+        "y": 792
+      },
+      "children": [
+        "a3894358-b89b-42e6-84ee-a04bc1a45ae7",
+        "9a3ea561-a413-4261-8b12-5b3af9346d36"
+      ]
+    },
+    "3af555fd-7c57-4cba-a9c6-e31c060668d7": {
+      "id": "3af555fd-7c57-4cba-a9c6-e31c060668d7",
+      "name": "Wait",
+      "title": "Wait <milliseconds>ms",
+      "description": "",
+      "properties": {
+        "milliseconds": 2000
+      },
+      "display": {
+        "x": 108,
+        "y": 924
+      }
+    },
+    "c248ecf1-591e-4ab8-8fed-f8e49a5f119b": {
+      "id": "c248ecf1-591e-4ab8-8fed-f8e49a5f119b",
+      "name": "RandomProbability",
+      "title": "RandomProbability",
+      "description": "",
+      "properties": {
+        "successProbability": 0.1,
+        "seed": 0
+      },
+      "display": {
+        "x": -420,
+        "y": 924
+      }
+    },
+    "82b69f2c-6808-4733-824e-b879fa94c5bd": {
+      "id": "82b69f2c-6808-4733-824e-b879fa94c5bd",
+      "name": "RandomProbability",
+      "title": "RandomProbability",
+      "description": "",
+      "properties": {
+        "successProbability": 0.5,
+        "seed": 0
+      },
+      "display": {
+        "x": -72,
+        "y": 300
+      }
+    },
+    "9a3ea561-a413-4261-8b12-5b3af9346d36": {
+      "id": "9a3ea561-a413-4261-8b12-5b3af9346d36",
+      "name": "Wait",
+      "title": "Wait <milliseconds>ms",
+      "description": "",
+      "properties": {
+        "milliseconds": 2000
+      },
+      "display": {
+        "x": 528,
+        "y": 924
+      }
+    },
+    "391c34c3-3417-4b32-b7fe-e266589b1d50": {
+      "id": "391c34c3-3417-4b32-b7fe-e266589b1d50",
+      "name": "WaitEvent",
+      "title": "WaitEvent",
+      "description": "",
+      "properties": {
+        "eventType": "Airborne"
+      },
+      "display": {
+        "x": 504,
+        "y": 372
+      }
+    },
+    "7a0213b7-ecba-4851-8288-a080081b7ae9": {
+      "id": "7a0213b7-ecba-4851-8288-a080081b7ae9",
+      "name": "SendEvent",
+      "title": "SendEvent",
+      "description": "",
+      "properties": {
+        "eventType": "StopAttack"
+      },
+      "display": {
+        "x": 720,
+        "y": 372
+      }
+    },
+    "e66b0fe0-1e38-4873-8731-f2b58339ab34": {
+      "id": "e66b0fe0-1e38-4873-8731-f2b58339ab34",
+      "name": "Wait",
+      "title": "Wait <milliseconds>ms",
+      "description": "",
+      "properties": {
+        "milliseconds": 2000
+      },
+      "display": {
+        "x": 1152,
+        "y": 372
+      }
+    },
+    "5ed34b74-b0e7-431f-9332-316edfa00c2e": {
+      "id": "5ed34b74-b0e7-431f-9332-316edfa00c2e",
+      "name": "Log",
+      "title": "索敌",
+      "description": "",
+      "properties": {
+        "text": "索敌"
+      },
+      "display": {
+        "x": -516,
+        "y": 300
+      }
+    },
+    "9364c07e-fed9-478d-8093-4db42c235f4a": {
+      "id": "9364c07e-fed9-478d-8093-4db42c235f4a",
+      "name": "Log",
+      "title": "放技能",
+      "description": "",
+      "properties": {
+        "text": "放技能"
+      },
+      "display": {
+        "x": -192,
+        "y": 924
+      }
+    },
+    "a3894358-b89b-42e6-84ee-a04bc1a45ae7": {
+      "id": "a3894358-b89b-42e6-84ee-a04bc1a45ae7",
+      "name": "Log",
+      "title": "普攻",
+      "description": "",
+      "properties": {
+        "text": "普攻"
+      },
+      "display": {
+        "x": 312,
+        "y": 924
+      }
+    },
+    "2b059a6f-b341-4f5b-8790-e9502d4a7454": {
+      "id": "2b059a6f-b341-4f5b-8790-e9502d4a7454",
+      "name": "Log",
+      "title": "走向怪物",
+      "description": "",
+      "properties": {
+        "text": "走向怪物"
+      },
+      "display": {
+        "x": -144,
+        "y": 72
+      }
+    },
+    "a5e3b57f-13fe-4e4b-9398-726a59b9e51d": {
+      "id": "a5e3b57f-13fe-4e4b-9398-726a59b9e51d",
+      "name": "Log",
+      "title": "被击飞",
+      "description": "",
+      "properties": {
+        "text": "被击飞"
+      },
+      "display": {
+        "x": 924,
+        "y": 372
+      }
+    },
+    "24563295-07ec-4c6a-981e-e398b1b78a64": {
+      "id": "24563295-07ec-4c6a-981e-e398b1b78a64",
+      "name": "EventBreak",
+      "title": "EventBreak",
+      "description": "",
+      "properties": {
+        "eventType": "StopAttack"
+      },
+      "display": {
+        "x": 216,
+        "y": 516
+      },
+      "child": "ade037ce-b62e-4b14-8231-22a619ce726b"
+    }
+  },
+  "display": {
+    "camera_x": 786,
+    "camera_y": 160,
+    "camera_z": 1,
+    "x": -132,
+    "y": -180
+  },
+  "custom_nodes": [
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "ParallelSelector",
+      "category": "composite",
+      "title": null,
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Selector",
+      "category": "composite",
+      "title": null,
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "RandomProbability",
+      "category": "action",
+      "title": null,
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "WaitEvent",
+      "category": "action",
+      "title": null,
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "SendEvent",
+      "category": "action",
+      "title": null,
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Log",
+      "category": "action",
+      "title": null,
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "EventBreak",
+      "category": "decorator",
+      "title": null,
+      "description": null,
+      "properties": {}
+    }
+  ]
+}

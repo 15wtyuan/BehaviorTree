@@ -47,12 +47,12 @@ namespace BehaviorTree.Editors
 
         private void BindTask()
         {
-            Task.EditorUtils.EventActive.AddListener(UpdateTaskActiveStatus);
+            Task.EventActive.AddListener(UpdateTaskActiveStatus);
         }
 
         public void RecursiveTaskUnbind()
         {
-            Task.EditorUtils.EventActive.RemoveListener(UpdateTaskActiveStatus);
+            Task.EventActive.RemoveListener(UpdateTaskActiveStatus);
 
             foreach (var child in _children)
             {

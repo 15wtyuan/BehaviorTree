@@ -2,6 +2,25 @@
 
 namespace BehaviorTree.Runtime
 {
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder Condition(this BehaviorTreeBuilder builder, string name,
+            Func<bool> action)
+        {
+            return builder.AddNode(new Condition
+            {
+                Name = name,
+                UpdateLogic = action
+            });
+        }
+
+        public static BehaviorTreeBuilder Condition(this BehaviorTreeBuilder builder,
+            Func<bool> action)
+        {
+            return builder.Condition("Condition", action);
+        }
+    }
+
     public class Condition : ConditionBase
     {
         public Func<bool> UpdateLogic;

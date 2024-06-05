@@ -1,7 +1,18 @@
-﻿namespace BehaviorTree.Runtime
+﻿using System.Collections.Generic;
+
+namespace BehaviorTree.Runtime
 {
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder RandomSelector(this BehaviorTreeBuilder builder,
+            string name = "Random Selector")
+        {
+            return builder.ParentTask<RandomSelector>(name);
+        }
+    }
+
     [TaskIcon("LinearScale.png")]
-    public class RandomSelector : CompositeBase
+    public class RandomSelector : CompositeBase, IJsonDeserializer
     {
         private bool _init;
 
@@ -31,9 +42,8 @@
             return TaskStatus.Failure;
         }
 
-        protected override void Reset()
+        protected override void OnReset()
         {
-            base.Reset();
             ShuffleChildren();
         }
 
@@ -47,6 +57,11 @@
                 var k = rng.Next(n + 1);
                 (Children[k], Children[n]) = (Children[n], Children[k]);
             }
+        }
+
+        public void BuildFromJson(Dictionary<string, object> jsonData)
+        {
+            Name = (string)jsonData["title"];
         }
     }
 }

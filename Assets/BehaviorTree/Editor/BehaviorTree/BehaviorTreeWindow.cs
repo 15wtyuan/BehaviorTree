@@ -34,7 +34,7 @@ namespace BehaviorTree.Editors
             GUILayout.Label($"Behavior Tree: {_name}", EditorStyles.boldLabel);
             if (_tree != null)
             {
-                GUILayout.Label($"SharedBlackboardPrint: {_tree.GetSharedBlackboardPrint()}", EditorStyles.boldLabel);
+                GUILayout.Label($"Blackboard:\n{_tree.GetSharedBlackboardPrint()}", EditorStyles.boldLabel);
             }
             _printer?.Print(position.size);
         }

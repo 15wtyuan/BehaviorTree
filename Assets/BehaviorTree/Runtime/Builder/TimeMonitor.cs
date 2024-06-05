@@ -4,6 +4,6 @@ namespace BehaviorTree.Runtime
 {
     public class TimeMonitor : ITimeMonitor
     {
-        public float DeltaTime => Time.deltaTime;
+        public int DeltaMillisecondsTime => Mathf.FloorToInt(Time.deltaTime * 1000);
     }
 }

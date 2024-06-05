@@ -1,11 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 namespace BehaviorTree.Runtime
 {
-    public class RandomProbability : ConditionBase
+    public static partial class BuilderExtensions
     {
-        public  SharedFloat SuccessProbability;
-        public  SharedInt Seed;
+        public static BehaviorTreeBuilder RandomProbability(this BehaviorTreeBuilder builder, string name,
+            SharedFloat successProbability, SharedInt seed)
+        {
+            return builder.AddNode(new RandomProbability
+            {
+                Name = name,
+                SuccessProbability = successProbability,
+                Seed = seed
+            });
+        }
+
+        public static BehaviorTreeBuilder RandomProbability(this BehaviorTreeBuilder builder,
+            SharedFloat successProbability, SharedInt seed)
+        {
+            return builder.RandomProbability("Random Probability", successProbability, seed);
+        }
+    }
+
+    public class RandomProbability : ConditionBase, IJsonDeserializer
+    {
+        public SharedFloat SuccessProbability;
+        public SharedInt Seed;
 
         protected override bool GetCondition()
         {
@@ -24,6 +46,36 @@ namespace BehaviorTree.Runtime
             }
 
             return randomValue < SuccessProbability.Value;
+        }
+
+        public void BuildFromJson(Dictionary<string, object> jsonData)
+        {
+            Name = (string)jsonData["title"];
+
+            var properties = jsonData["properties"] as Dictionary<string, object>;
+            Debug.Assert(properties != null, nameof(properties) + " != null");
+
+            if (properties.TryGetValue("successProbability", out var value))
+            {
+                var floatValue = (float)(double)value;
+                SuccessProbability = floatValue;
+            }
+            else if (properties.TryGetValue("b_successProbability", out value))
+            {
+                var strValue = (string)value;
+                SuccessProbability = SharedBlackboard.Get<SharedFloat>(strValue);
+            }
+
+            if (properties.TryGetValue("seed", out var value2))
+            {
+                var intValue = (int)(long)value2;
+                Seed = intValue;
+            }
+            else if (properties.TryGetValue("b_seed", out value2))
+            {
+                var strValue = (string)value2;
+                Seed = SharedBlackboard.Get<SharedInt>(strValue);
+            }
         }
     }
 }

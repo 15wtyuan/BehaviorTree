@@ -108,7 +108,7 @@ namespace BehaviorTree.Runtime
             Exit();
         }
 
-        protected override void Reset()
+        private void Reset()
         {
             _start = false;
             _exit = false;

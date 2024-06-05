@@ -15,13 +15,5 @@
             var child = Children[0];
             return child.Update();
         }
-
-        public override void End()
-        {
-        }
-
-        protected override void Reset()
-        {
-        }
     }
 }

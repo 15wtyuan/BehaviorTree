@@ -43,7 +43,7 @@ namespace BehaviorTree.Editors
         public void Print(Vector2 windowSize)
         {
             _scrollPosition = GUI.BeginScrollView(
-                new Rect(0, 0, windowSize.x, windowSize.y),
+                new Rect(0, 100, windowSize.x, windowSize.y),
                 _scrollPosition,
                 _containerSize);
             _root.Print();

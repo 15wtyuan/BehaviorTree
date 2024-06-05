@@ -1,6 +1,30 @@
-﻿namespace BehaviorTree.Runtime
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+
+namespace BehaviorTree.Runtime
 {
-    public class EventBreak : DecoratorBase, IEventObserver
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder EventBreak(this BehaviorTreeBuilder builder,
+            SharedString eventType)
+        {
+            return builder.EventBreak("Event Break", eventType);
+        }
+
+        public static BehaviorTreeBuilder EventBreak(this BehaviorTreeBuilder builder,
+            string name, SharedString eventType)
+        {
+            var eventBreak = new EventBreak
+            {
+                Name = name,
+                EventType = eventType
+            };
+
+            return builder.AddNodeWithPointer(eventBreak);
+        }
+    }
+
+    public class EventBreak : DecoratorBase, IEventObserver, IJsonDeserializer
     {
         public SharedString EventType;
 
@@ -17,7 +41,7 @@
 
             return childStatus;
         }
-        
+
         protected override void OnStart()
         {
             base.OnStart();
@@ -39,6 +63,25 @@
         public void OnNotify(string eventType)
         {
             _receivedEvent = true;
+        }
+
+        public void BuildFromJson(Dictionary<string, object> jsonData)
+        {
+            Name = (string)jsonData["title"];
+
+            var properties = jsonData["properties"] as Dictionary<string, object>;
+            Debug.Assert(properties != null, nameof(properties) + " != null");
+
+            if (properties.TryGetValue("eventType", out var value))
+            {
+                var strValue = (string)value;
+                EventType = strValue;
+            }
+            else if (properties.TryGetValue("b_eventType", out value))
+            {
+                var strValue = (string)value;
+                EventType = SharedBlackboard.Get<SharedString>(strValue);
+            }
         }
     }
 }

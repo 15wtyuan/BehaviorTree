@@ -23,7 +23,7 @@
         protected virtual void OnExit()
         {
         }
-        
+
         protected virtual void OnReset()
         {
         }
@@ -80,7 +80,7 @@
             _lastRoundCount = Tree.RoundCount;
         }
 
-        protected override void Reset()
+        private void Reset()
         {
             _active = false;
             _start = false;

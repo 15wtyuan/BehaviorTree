@@ -2,7 +2,16 @@
 
 namespace BehaviorTree.Runtime
 {
-    public class ParallelSelector : CompositeBase
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder ParallelSelector(this BehaviorTreeBuilder builder,
+            string name = "Parallel Selector")
+        {
+            return builder.ParentTask<ParallelSelector>(name);
+        }
+    }
+
+    public class ParallelSelector : CompositeBase, IJsonDeserializer
     {
         private readonly Dictionary<TaskBase, TaskStatus> _childStatus = new();
 
@@ -57,19 +66,22 @@ namespace BehaviorTree.Runtime
             return TaskStatus.Continue;
         }
 
-        protected override void Reset()
+        protected override void OnReset()
         {
             _childStatus.Clear();
-
-            base.Reset();
         }
 
-        public override void End()
+        protected override void OnExit()
         {
             foreach (var child in Children)
             {
                 child.End();
             }
+        }
+
+        public void BuildFromJson(Dictionary<string, object> jsonData)
+        {
+            Name = (string)jsonData["title"];
         }
     }
 }

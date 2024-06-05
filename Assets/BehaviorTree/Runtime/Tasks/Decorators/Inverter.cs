@@ -1,7 +1,18 @@
-﻿namespace BehaviorTree.Runtime
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+
+namespace BehaviorTree.Runtime
 {
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder Inverter(this BehaviorTreeBuilder builder, string name = "Inverter")
+        {
+            return builder.ParentTask<Inverter>(name);
+        }
+    }
+
     [TaskIcon("Invert.png")]
-    public class Inverter : DecoratorBase
+    public class Inverter : DecoratorBase, IJsonDeserializer
     {
         protected override TaskStatus OnUpdate()
         {
@@ -19,6 +30,11 @@
             }
 
             return status;
+        }
+        
+        public void BuildFromJson(Dictionary<string, object> jsonData)
+        {
+            Name = (string)jsonData["title"];
         }
     }
 }

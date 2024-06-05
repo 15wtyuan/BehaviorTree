@@ -1,7 +1,18 @@
-﻿namespace BehaviorTree.Runtime
+﻿using System.Collections.Generic;
+
+namespace BehaviorTree.Runtime
 {
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder ReturnSuccess(this BehaviorTreeBuilder builder,
+            string name = "Return Success")
+        {
+            return builder.ParentTask<ReturnSuccess>(name);
+        }
+    }
+
     [TaskIcon("Checkmark.png")]
-    public class ReturnSuccess : DecoratorBase
+    public class ReturnSuccess : DecoratorBase, IJsonDeserializer
     {
         protected override TaskStatus OnUpdate()
         {
@@ -12,6 +23,11 @@
             }
 
             return TaskStatus.Success;
+        }
+
+        public void BuildFromJson(Dictionary<string, object> jsonData)
+        {
+            Name = (string)jsonData["title"];
         }
     }
 }

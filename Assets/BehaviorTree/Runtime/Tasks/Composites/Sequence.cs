@@ -1,7 +1,17 @@
-﻿namespace BehaviorTree.Runtime
+﻿using System.Collections.Generic;
+
+namespace BehaviorTree.Runtime
 {
+    public static partial class BuilderExtensions
+    {
+        public static BehaviorTreeBuilder Sequence(this BehaviorTreeBuilder builder, string name = "Sequence")
+        {
+            return builder.ParentTask<Sequence>(name);
+        }
+    }
+
     [TaskIcon("RightArrow.png")]
-    public class Sequence : CompositeBase
+    public class Sequence : CompositeBase, IJsonDeserializer
     {
         protected override TaskStatus OnUpdate()
         {
@@ -19,6 +29,11 @@
             }
 
             return TaskStatus.Success;
+        }
+
+        public void BuildFromJson(Dictionary<string, object> jsonData)
+        {
+            Name = (string)jsonData["title"];
         }
     }
 }
