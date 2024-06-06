@@ -5,11 +5,9 @@ namespace BehaviorTree.Editors
 {
     public class StatusIcons
     {
-        private const string ICON_STATUS_PATH = "ROOT/Editor/Icons/Status";
-
-        private TextureLoader Success { get; } = new TextureLoader($"{ICON_STATUS_PATH}/Success.png");
-        private TextureLoader Failure { get; } = new TextureLoader($"{ICON_STATUS_PATH}/Failure.png");
-        private TextureLoader Continue { get; } = new TextureLoader($"{ICON_STATUS_PATH}/Continue.png");
+        private TextureLoader Success { get; } = new TextureLoader("Success.png");
+        private TextureLoader Failure { get; } = new TextureLoader("Success.png");
+        private TextureLoader Continue { get; } = new TextureLoader("Success.png");
 
         public TextureLoader GetIcon(TaskStatus status)
         {

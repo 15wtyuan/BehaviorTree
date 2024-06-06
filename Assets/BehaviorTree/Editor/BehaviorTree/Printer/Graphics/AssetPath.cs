@@ -1,27 +1,32 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace BehaviorTree.Editors {
+namespace BehaviorTree.Editors
+{
     /// <summary>
     /// Determine if this is a package of the Unity Editor since Unity has no API to determine this
     /// </summary>
-    public static class AssetPath {
-        private const string PATH_PROJECT = "Assets/BehaviorTree";
+    public static class AssetPath
+    {
+        private const string PathIcon = "Assets/BehaviorTree/Editor/Icons";
 
-        private static string _basePath;
+        private static string _iconPath;
 
-        public static string BasePath {
-            get {
-                if (_basePath != null) return _basePath;
+        public static string IconPath
+        {
+            get
+            {
+                if (_iconPath != null) return _iconPath;
 
-                if (AssetDatabase.IsValidFolder(PATH_PROJECT)) {
-                    _basePath = PATH_PROJECT;
-                    return _basePath;
+                if (AssetDatabase.IsValidFolder(PathIcon))
+                {
+                    _iconPath = PathIcon;
+                    return _iconPath;
                 }
 
-                Debug.LogError("Asset root could not be found");
+                Debug.LogError($"Icon root could not be found {PathIcon}");
 
-                return null;
+                return "";
             }
         }
     }

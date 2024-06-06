@@ -13,8 +13,6 @@ namespace BehaviorTree.Editors
 
         private readonly TextureLoader _iconMain;
 
-        private const string PackageRoot = "ROOT/Editor/Icons/Tasks/";
-
         private Texture2D _dividerGraphic;
         private Texture2D _verticalBottom;
         private Texture2D _verticalTop;
@@ -34,7 +32,7 @@ namespace BehaviorTree.Editors
             {
                 if (!string.IsNullOrEmpty(customAttributes[0].IconPath))
                 {
-                    iconPath = $"{PackageRoot}/{customAttributes[0].IconPath}";
+                    iconPath = customAttributes[0].IconPath;
                 }
             }
 
