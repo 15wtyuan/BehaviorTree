@@ -28,7 +28,7 @@ namespace BehaviorTree.Editors
 
             AddBox(container);
 
-            if (task is TaskParentBase { Children: not null } taskParentBase)
+            if (task is TaskParentBase taskParentBase && taskParentBase.Children != null)
             {
                 var childContainer = new GraphContainerHorizontal();
                 foreach (var child in taskParentBase.Children)

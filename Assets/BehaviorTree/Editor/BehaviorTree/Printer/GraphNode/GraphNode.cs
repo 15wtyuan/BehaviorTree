@@ -31,7 +31,8 @@ namespace BehaviorTree.Editors
             VerticalConnectorTopHeight = options.VerticalConnectorTopHeight;
             HorizontalConnectorHeight = options.HorizontalConnectorHeight;
 
-            if (task is not TaskParentBase taskParentBase) return;
+            var taskParentBase = task as TaskParentBase;
+            if (taskParentBase == null) return;
             foreach (var child in taskParentBase.Children)
             {
                 Children.Add(new GraphNode(child, printer, options));
