@@ -9,7 +9,7 @@ namespace BehaviorTree.Runtime
         private bool _exit;
         private int _lastRoundCount;
 
-        public List<TaskBase> Children { get; } = new();
+        public List<TaskBase> Children { get; } = new List<TaskBase>();
 
         protected virtual int MaxChildren => -1;
 

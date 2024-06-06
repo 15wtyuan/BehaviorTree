@@ -5,9 +5,9 @@ namespace BehaviorTree.Runtime
 {
     public class Blackboard
     {
-        private readonly Dictionary<string, SharedVariable> _data = new();
+        private readonly Dictionary<string, SharedVariable> _data = new Dictionary<string, SharedVariable>();
 
-        private readonly Dictionary<string, EventSubject> _events = new();
+        private readonly Dictionary<string, EventSubject> _events = new Dictionary<string, EventSubject>();
 
         public void Set<T>(string key, T value) where T : SharedVariable
         {

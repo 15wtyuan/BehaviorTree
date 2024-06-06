@@ -6,33 +6,43 @@ namespace BehaviorTree.Runtime
     {
         public static int ParseInt(object value)
         {
-            return value switch
+            switch (value)
             {
-                long l => (int)l,
-                string s => int.Parse(s),
-                _ => throw new FormatException()
-            };
+                case long l:
+                    return (int)l;
+                case string s:
+                    return int.Parse(s);
+                default:
+                    throw new FormatException();
+            }
         }
 
         public static float ParseFloat(object value)
         {
-            return value switch
+            switch (value)
             {
-                double d => (float)d,
-                long l => l,
-                string s => float.Parse(s),
-                _ => throw new FormatException()
-            };
+                case double d:
+                    return (float)d;
+                case long l:
+                    return l;
+                case string s:
+                    return float.Parse(s);
+                default:
+                    throw new FormatException();
+            }
         }
 
         public static bool ParseBool(object value)
         {
-            return value switch
+            switch (value)
             {
-                bool b => b,
-                string s => bool.Parse(s),
-                _ => throw new FormatException()
-            };
+                case bool b:
+                    return b;
+                case string s:
+                    return bool.Parse(s);
+                default:
+                    throw new FormatException();
+            }
         }
 
         public static string ParseString(object value)

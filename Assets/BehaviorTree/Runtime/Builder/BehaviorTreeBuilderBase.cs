@@ -5,7 +5,7 @@ namespace BehaviorTree.Runtime
     public partial class BehaviorTreeBuilder
     {
         private readonly BehaviorTree _tree;
-        private readonly List<TaskParentBase> _pointers = new();
+        private readonly List<TaskParentBase> _pointers = new List<TaskParentBase>();
         private readonly Blackboard _sharedBlackboard;
 
         private TaskParentBase PointerCurrent
@@ -13,7 +13,7 @@ namespace BehaviorTree.Runtime
             get
             {
                 if (_pointers.Count == 0) return null;
-                return _pointers[^1];
+                return _pointers[_pointers.Count - 1];
             }
         }
 

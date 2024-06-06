@@ -5,7 +5,7 @@ namespace BehaviorTree.Runtime
     public class EventSubject
     {
         private readonly string _eventType;
-        private readonly HashSet<IEventObserver> _observers = new();
+        private readonly HashSet<IEventObserver> _observers = new HashSet<IEventObserver>();
 
         public EventSubject(string eventType)
         {

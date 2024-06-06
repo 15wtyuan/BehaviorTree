@@ -112,7 +112,7 @@ namespace BehaviorTree.Runtime
 
         private static IJsonDeserializer CreateNodeInstance(string fullName)
         {
-            if (!fullName.Contains('.'))
+            if (!fullName.Contains("."))
             {
                 fullName = $"BehaviorTree.Runtime.{fullName}";
             }

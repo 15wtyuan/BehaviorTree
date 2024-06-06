@@ -18,14 +18,14 @@ namespace BehaviorTree.Runtime
     public class BehaviorTree : IBehaviorTree
     {
         private readonly Blackboard _sharedBlackboard;
-        private readonly List<TaskBase> _activeTasks = new();
+        private readonly List<TaskBase> _activeTasks = new List<TaskBase>();
         private TreeStatus _status = TreeStatus.End;
         private bool _loop;
 
         public int RoundCount { get; private set; }
 
         public string Name { get; set; }
-        public TaskRoot Root { get; } = new();
+        public TaskRoot Root { get; } = new TaskRoot();
         public IReadOnlyList<TaskBase> ActiveTasks => _activeTasks;
 
         public BehaviorTree(Blackboard sharedBlackboard)

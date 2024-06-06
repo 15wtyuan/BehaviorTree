@@ -14,7 +14,7 @@ namespace BehaviorTree.Runtime
     [TaskIcon("CompareArrows.png")]
     public class Parallel : CompositeBase, IJsonDeserializer
     {
-        private readonly Dictionary<TaskBase, TaskStatus> _childStatus = new();
+        private readonly Dictionary<TaskBase, TaskStatus> _childStatus = new Dictionary<TaskBase, TaskStatus>();
 
         protected override TaskStatus OnUpdate()
         {

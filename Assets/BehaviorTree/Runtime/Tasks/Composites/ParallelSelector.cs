@@ -13,7 +13,7 @@ namespace BehaviorTree.Runtime
 
     public class ParallelSelector : CompositeBase, IJsonDeserializer
     {
-        private readonly Dictionary<TaskBase, TaskStatus> _childStatus = new();
+        private readonly Dictionary<TaskBase, TaskStatus> _childStatus = new Dictionary<TaskBase, TaskStatus>();
 
         protected override TaskStatus OnUpdate()
         {
