@@ -70,14 +70,14 @@ namespace BehaviorTree.Runtime
 
             if (properties.TryGetValue("milliseconds", out var value))
             {
-                var intValue = (int)(long)value;
+                var intValue = MiniJsonHelper.ParseInt(value);
                 Milliseconds = intValue;
 
                 Name = Name.Replace("<milliseconds>", $"{intValue}");
             }
             else if (properties.TryGetValue("b_milliseconds", out value))
             {
-                var strValue = (string)value;
+                var strValue = MiniJsonHelper.ParseString(value);
                 Milliseconds = SharedBlackboard.Get<SharedInt>(strValue);
             }
         }

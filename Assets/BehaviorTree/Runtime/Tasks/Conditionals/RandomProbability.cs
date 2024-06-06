@@ -57,23 +57,23 @@ namespace BehaviorTree.Runtime
 
             if (properties.TryGetValue("successProbability", out var value))
             {
-                var floatValue = (float)(double)value;
+                var floatValue = MiniJsonHelper.ParseFloat(value);
                 SuccessProbability = floatValue;
             }
             else if (properties.TryGetValue("b_successProbability", out value))
             {
-                var strValue = (string)value;
+                var strValue = MiniJsonHelper.ParseString(value);
                 SuccessProbability = SharedBlackboard.Get<SharedFloat>(strValue);
             }
 
             if (properties.TryGetValue("seed", out var value2))
             {
-                var intValue = (int)(long)value2;
+                var intValue = MiniJsonHelper.ParseInt(value2);
                 Seed = intValue;
             }
             else if (properties.TryGetValue("b_seed", out value2))
             {
-                var strValue = (string)value2;
+                var strValue = MiniJsonHelper.ParseString(value2);
                 Seed = SharedBlackboard.Get<SharedInt>(strValue);
             }
         }

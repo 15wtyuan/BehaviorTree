@@ -5,6 +5,45 @@ using MiniJSON;
 
 namespace BehaviorTree.Runtime
 {
+    public static class MiniJsonHelper
+    {
+        public static int ParseInt(object value)
+        {
+            return value switch
+            {
+                long l => (int)l,
+                string s => int.Parse(s),
+                _ => throw new FormatException()
+            };
+        }
+
+        public static float ParseFloat(object value)
+        {
+            return value switch
+            {
+                double d => (float)d,
+                long l => l,
+                string s => float.Parse(s),
+                _ => throw new FormatException()
+            };
+        }
+
+        public static bool ParseBool(object value)
+        {
+            return value switch
+            {
+                bool b => b,
+                string s => bool.Parse(s),
+                _ => throw new FormatException()
+            };
+        }
+
+        public static string ParseString(object value)
+        {
+            return value.ToString();
+        }
+    }
+
     /// <summary>
     /// https://github.com/behavior3/behavior3editor
     /// from json
@@ -41,7 +80,7 @@ namespace BehaviorTree.Runtime
                 case "Int":
                 case "int":
                 {
-                    var intValue = (int)(long)value;
+                    var intValue = MiniJsonHelper.ParseInt(value);
                     SharedInt sharedInt = intValue;
                     result = sharedInt;
                 }
@@ -49,7 +88,7 @@ namespace BehaviorTree.Runtime
                 case "Float":
                 case "float":
                 {
-                    var floatValue = (float)(double)value;
+                    var floatValue = MiniJsonHelper.ParseFloat(value);
                     SharedFloat sharedFloat = floatValue;
                     result = sharedFloat;
                 }
@@ -57,7 +96,7 @@ namespace BehaviorTree.Runtime
                 case "Bool":
                 case "bool":
                 {
-                    var boolValue = (bool)value;
+                    var boolValue = MiniJsonHelper.ParseBool(value);
                     SharedBool sharedBool = boolValue;
                     result = sharedBool;
                 }
@@ -65,7 +104,7 @@ namespace BehaviorTree.Runtime
                 case "String":
                 case "string":
                 {
-                    var stringValue = (string)value;
+                    var stringValue = MiniJsonHelper.ParseString(value);
                     SharedString sharedString = stringValue;
                     result = sharedString;
                 }

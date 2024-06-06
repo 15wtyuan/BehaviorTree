@@ -41,12 +41,12 @@ namespace BehaviorTree.Runtime
 
             if (properties.TryGetValue("text", out var value))
             {
-                var strValue = (string)value;
+                var strValue = MiniJsonHelper.ParseString(value);
                 Text = strValue;
             }
             else if (properties.TryGetValue("b_text", out value))
             {
-                var strValue = (string)value;
+                var strValue = MiniJsonHelper.ParseString(value);
                 Text = SharedBlackboard.Get<SharedString>(strValue);
             }
         }

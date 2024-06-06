@@ -62,12 +62,12 @@ namespace BehaviorTree.Runtime
 
             if (properties.TryGetValue("eventType", out var value))
             {
-                var strValue = (string)value;
+                var strValue = MiniJsonHelper.ParseString(value);
                 EventType = strValue;
             }
             else if (properties.TryGetValue("b_eventType", out value))
             {
-                var strValue = (string)value;
+                var strValue = MiniJsonHelper.ParseString(value);
                 EventType = SharedBlackboard.Get<SharedString>(strValue);
             }
         }
