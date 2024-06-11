@@ -17,7 +17,6 @@ namespace BT.Runtime
     [System.Serializable]
     public class BehaviorTree : IBehaviorTree
     {
-        private readonly Blackboard _sharedBlackboard;
         private readonly List<TaskBase> _activeTasks = new List<TaskBase>();
         private TreeStatus _status = TreeStatus.End;
         private bool _loop;
@@ -27,10 +26,11 @@ namespace BT.Runtime
         public string Name { get; set; }
         public TaskRoot Root { get; } = new TaskRoot();
         public IReadOnlyList<TaskBase> ActiveTasks => _activeTasks;
+        public Blackboard SharedBlackboard { get; }
 
         public BehaviorTree(Blackboard sharedBlackboard)
         {
-            _sharedBlackboard = sharedBlackboard;
+            SharedBlackboard = sharedBlackboard;
             SyncNodes(Root);
         }
 
@@ -97,7 +97,7 @@ namespace BT.Runtime
         {
             parent.AddChild(child);
             child.Tree = this;
-            child.SharedBlackboard = _sharedBlackboard;
+            child.SharedBlackboard = SharedBlackboard;
         }
 
         public void Splice(TaskParentBase parent, BehaviorTree tree)
@@ -109,12 +109,12 @@ namespace BT.Runtime
 
         private void SyncNodes(TaskParentBase taskParent)
         {
-            taskParent.SharedBlackboard = _sharedBlackboard;
+            taskParent.SharedBlackboard = SharedBlackboard;
             taskParent.Tree = this;
 
             foreach (var child in taskParent.Children)
             {
-                child.SharedBlackboard = _sharedBlackboard;
+                child.SharedBlackboard = SharedBlackboard;
                 child.Tree = this;
 
                 if (child is TaskParentBase parent)
@@ -136,7 +136,7 @@ namespace BT.Runtime
 
         public string GetSharedBlackboardPrint()
         {
-            return _sharedBlackboard.GetSharedVariablePrint();
+            return SharedBlackboard.GetSharedVariablePrint();
         }
     }
 }
