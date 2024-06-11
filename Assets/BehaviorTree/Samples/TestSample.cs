@@ -1,4 +1,7 @@
-﻿using BehaviorTree.Runtime;
+﻿using System.Collections;
+using System.Collections.Generic;
+using BehaviorTree.Runtime;
+using MiniJSON;
 using UnityEngine;
 
 namespace BehaviorTree.Samples
@@ -11,6 +14,8 @@ namespace BehaviorTree.Samples
 
         private Blackboard _sharedBlackboardA;
         private Blackboard _sharedBlackboardB;
+
+        private List<Runtime.BehaviorTree> _trees = new();
 
         private void Awake()
         {
@@ -68,6 +73,8 @@ namespace BehaviorTree.Samples
                 .AddTreeFromJson(jsonFileContent)
                 .Build();
             // treeB.Start(true);
+
+            // StartCoroutine(PerformanceTesting());
         }
 
         private void Update()
@@ -81,6 +88,28 @@ namespace BehaviorTree.Samples
 
             treeA.Tick();
             treeB.Tick();
+
+            foreach (var tree in _trees)
+            {
+                tree.Tick();
+            }
+        }
+
+        private IEnumerator PerformanceTesting()
+        {
+            yield return new WaitForSeconds(2f);
+            const string jsonFilePath = "JsonSamples";
+            var jsonTextAsset = Resources.Load<TextAsset>(jsonFilePath);
+            var dict = Json.Deserialize(jsonTextAsset.text) as Dictionary<string, object>;
+
+            for (int i = 0; i < 100; i++)
+            {
+                var tree = new BehaviorTreeBuilder(new Blackboard())
+                    .AddTreeFromJson(dict)
+                    .Build();
+                tree.Start(true);
+                _trees.Add(tree);
+            }
         }
     }
 }

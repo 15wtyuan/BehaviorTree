@@ -15,7 +15,11 @@ namespace BehaviorTree.Runtime
         {
             var dict = Json.Deserialize(jsonString) as Dictionary<string, object>;
             Debug.Assert(dict != null, nameof(dict) + " != null");
+            return AddTreeFromJson(dict);
+        }
 
+        public BehaviorTreeBuilder AddTreeFromJson(Dictionary<string, object> dict)
+        {
             //添加黑板属性
             var properties = dict["properties"] as Dictionary<string, object>;
             Debug.Assert(properties != null, nameof(properties) + " != null");
