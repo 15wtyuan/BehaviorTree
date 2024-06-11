@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BehaviorTree.Runtime
+namespace BT.Runtime
 {
     public static class MiniJsonHelper
     {

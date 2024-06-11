@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BehaviorTree.Runtime
+namespace BT.Runtime
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class TaskIconAttribute : Attribute

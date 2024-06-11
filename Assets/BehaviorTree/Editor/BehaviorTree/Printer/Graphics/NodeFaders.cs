@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BehaviorTree.Editors {
+namespace BT.Editors {
     public class NodeFaders {
         public ColorFader BackgroundFader { get; } = new ColorFader(
             new Color(0.65f, 0.65f, 0.65f), new Color(0.39f, 0.78f, 0.39f));

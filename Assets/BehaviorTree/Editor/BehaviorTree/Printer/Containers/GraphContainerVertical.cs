@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BehaviorTree.Editors {
+namespace BT.Editors {
     public class GraphContainerVertical : GraphContainerHorizontal {
         public override void AddBox (IGraphBox child) {
             CalculateChild(child);

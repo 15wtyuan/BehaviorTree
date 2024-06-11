@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BehaviorTree.Editors {
+namespace BT.Editors {
     public interface IGraphBox {
         List<IGraphBox> ChildContainers { get; }
 

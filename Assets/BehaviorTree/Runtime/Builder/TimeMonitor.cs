@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BehaviorTree.Runtime
+namespace BT.Runtime
 {
     public class TimeMonitor : ITimeMonitor
     {

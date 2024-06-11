@@ -1,8 +1,8 @@
-using BehaviorTree.Runtime;
+using BT.Runtime;
 using UnityEditor;
 using UnityEngine;
 
-namespace BehaviorTree.Editors
+namespace BT.Editors
 {
     [CustomPropertyDrawer(typeof(Runtime.BehaviorTree))]
     public class BehaviorTreeDrawer : PropertyDrawer

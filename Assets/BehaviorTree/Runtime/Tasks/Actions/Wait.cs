@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace BehaviorTree.Runtime
+namespace BT.Runtime
 {
     public interface ITimeMonitor
     {

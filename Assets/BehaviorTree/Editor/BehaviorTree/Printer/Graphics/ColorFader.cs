@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BehaviorTree.Editors {
+namespace BT.Editors {
     public class ColorFader {
         const float FADE_DURATION = 0.8f;
 

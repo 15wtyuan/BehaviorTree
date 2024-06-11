@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree.Runtime
+﻿namespace BT.Runtime
 {
     [TaskIcon("DownArrow.png")]
     public class TaskRoot : TaskParentBase

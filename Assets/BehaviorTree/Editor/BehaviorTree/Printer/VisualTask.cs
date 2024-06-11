@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using BehaviorTree.Runtime;
+using BT.Runtime;
 
-namespace BehaviorTree.Editors
+namespace BT.Editors
 {
     public class VisualTask
     {

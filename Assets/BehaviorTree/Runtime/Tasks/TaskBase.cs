@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 #endif
 
-namespace BehaviorTree.Runtime
+namespace BT.Runtime
 {
     public abstract class TaskBase
     {

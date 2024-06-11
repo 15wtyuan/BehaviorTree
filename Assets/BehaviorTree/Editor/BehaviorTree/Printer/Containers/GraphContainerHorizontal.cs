@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BehaviorTree.Editors {
+namespace BT.Editors {
     public class GraphContainerHorizontal : IGraphContainer {
         protected readonly List<IGraphBox> _childContainers = new List<IGraphBox>();
         

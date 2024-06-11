@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using BehaviorTree.Runtime;
+using BT.Runtime;
 using UnityEngine;
 
-namespace BehaviorTree.Editors
+namespace BT.Editors
 {
     public class GraphNode
     {

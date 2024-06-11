@@ -1,21 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using BehaviorTree.Runtime;
+using BT.Runtime;
 using MiniJSON;
 using UnityEngine;
 
-namespace BehaviorTree.Samples
+namespace BT.Samples
 {
     public class TestSample : MonoBehaviour
     {
         public bool isAirborne;
-        [SerializeField] private Runtime.BehaviorTree treeA;
-        [SerializeField] private Runtime.BehaviorTree treeB;
+        [SerializeField] private BehaviorTree treeA;
+        [SerializeField] private BehaviorTree treeB;
 
         private Blackboard _sharedBlackboardA;
         private Blackboard _sharedBlackboardB;
 
-        private List<Runtime.BehaviorTree> _trees = new();
+        private List<BehaviorTree> _trees = new();
 
         private void Awake()
         {

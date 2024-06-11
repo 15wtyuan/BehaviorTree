@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BehaviorTree.Runtime
+namespace BT.Runtime
 {
     public class EventSubject
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using MiniJSON;
 
-namespace BehaviorTree.Runtime
+namespace BT.Runtime
 {
     /// <summary>
     /// https://github.com/behavior3/behavior3editor

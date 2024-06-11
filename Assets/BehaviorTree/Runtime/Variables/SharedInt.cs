@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree.Runtime
+﻿namespace BT.Runtime
 {
     public class SharedInt : SharedVariable<int>
     {

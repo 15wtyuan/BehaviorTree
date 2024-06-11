@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BehaviorTree.Editors {
+namespace BT.Editors {
     public class GuiStyleCollection {
         public NodeBoxStyle BoxActive { get; } = new NodeBoxStyle(Color.gray, Color.white);
 

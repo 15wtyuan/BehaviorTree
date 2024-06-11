@@ -2,7 +2,7 @@
 using UnityEngine;
 using Debug = System.Diagnostics.Debug;
 
-namespace BehaviorTree.Runtime
+namespace BT.Runtime
 {
     public static partial class BuilderExtensions
     {

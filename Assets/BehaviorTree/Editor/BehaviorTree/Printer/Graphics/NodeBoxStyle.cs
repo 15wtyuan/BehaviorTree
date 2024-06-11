@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace BehaviorTree.Editors {
+namespace BT.Editors {
     public class NodeBoxStyle {
         public GUIStyle Style { get; }
 

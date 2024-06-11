@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BehaviorTree.Editors {
+namespace BT.Editors {
     public class GraphNodeOptions {
         public int VerticalConnectorBottomHeight { get; set; }
         public int HorizontalConnectorHeight { get; set; }

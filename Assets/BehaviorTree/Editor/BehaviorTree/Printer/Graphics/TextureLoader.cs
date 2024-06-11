@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace BehaviorTree.Editors
+namespace BT.Editors
 {
     public class TextureLoader
     {

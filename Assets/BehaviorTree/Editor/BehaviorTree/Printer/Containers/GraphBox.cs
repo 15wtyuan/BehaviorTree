@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BehaviorTree.Editors {
+namespace BT.Editors {
     public class GraphBox : IGraphBox {
         public List<IGraphBox> ChildContainers { get; } = new List<IGraphBox>();
         public bool SkipCentering { get; set; }

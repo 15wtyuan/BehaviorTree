@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace BehaviorTree.Editors
+namespace BT.Editors
 {
     /// <summary>
     /// Determine if this is a package of the Unity Editor since Unity has no API to determine this

@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree.Runtime
+﻿namespace BT.Runtime
 {
     [TaskIcon("Question.png")]
     [TaskIconPadding(10)]
