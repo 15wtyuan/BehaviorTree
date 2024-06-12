@@ -63,7 +63,7 @@ namespace BT.Runtime
             else if (properties.TryGetValue("b_successProbability", out value))
             {
                 var strValue = MiniJsonHelper.ParseString(value);
-                SuccessProbability = SharedBlackboard.Get<SharedFloat>(strValue);
+                SuccessProbability = SelfBlackboard.Get<SharedFloat>(strValue);
             }
 
             if (properties.TryGetValue("seed", out var value2))
@@ -74,7 +74,7 @@ namespace BT.Runtime
             else if (properties.TryGetValue("b_seed", out value2))
             {
                 var strValue = MiniJsonHelper.ParseString(value2);
-                Seed = SharedBlackboard.Get<SharedInt>(strValue);
+                Seed = SelfBlackboard.Get<SharedInt>(strValue);
             }
         }
     }

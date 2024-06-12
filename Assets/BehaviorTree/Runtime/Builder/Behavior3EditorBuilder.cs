@@ -27,7 +27,7 @@ namespace BT.Runtime
             {
                 var keys = pair.Key.Split('_');
                 var variable = ParseVariables(keys[0], pair.Value);
-                _sharedBlackboard.Set(keys[1], variable);
+                _selfBlackboard.Set(keys[1], variable);
             }
 
             var nodes = dict["nodes"] as Dictionary<string, object>;
@@ -118,7 +118,7 @@ namespace BT.Runtime
         {
             if (!fullName.Contains("."))
             {
-                fullName = $"BehaviorTree.Runtime.{fullName}";
+                fullName = $"BT.Runtime.{fullName}";
             }
 
             var o = Type.GetType(fullName);

@@ -28,7 +28,7 @@ namespace BT.Runtime
 
         protected override TaskStatus OnUpdate()
         {
-            SharedBlackboard.SendEvent(EventType.Value);
+            SelfBlackboard.SendEvent(EventType.Value);
             return TaskStatus.Success;
         }
 
@@ -47,7 +47,7 @@ namespace BT.Runtime
             else if (properties.TryGetValue("b_eventType", out value))
             {
                 var strValue = MiniJsonHelper.ParseString(value);
-                EventType = SharedBlackboard.Get<SharedString>(strValue);
+                EventType = SelfBlackboard.Get<SharedString>(strValue);
             }
         }
     }

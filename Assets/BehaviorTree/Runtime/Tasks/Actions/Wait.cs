@@ -78,7 +78,7 @@ namespace BT.Runtime
             else if (properties.TryGetValue("b_milliseconds", out value))
             {
                 var strValue = MiniJsonHelper.ParseString(value);
-                Milliseconds = SharedBlackboard.Get<SharedInt>(strValue);
+                Milliseconds = SelfBlackboard.Get<SharedInt>(strValue);
             }
         }
     }

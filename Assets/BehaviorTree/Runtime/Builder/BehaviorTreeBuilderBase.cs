@@ -6,7 +6,7 @@ namespace BT.Runtime
     {
         private readonly BehaviorTree _tree;
         private readonly List<TaskParentBase> _pointers = new List<TaskParentBase>();
-        private readonly Blackboard _sharedBlackboard;
+        private readonly Blackboard _selfBlackboard;
 
         private TaskParentBase PointerCurrent
         {
@@ -17,10 +17,17 @@ namespace BT.Runtime
             }
         }
 
-        public BehaviorTreeBuilder(Blackboard sharedBlackboard)
+        public BehaviorTreeBuilder(Blackboard selfBlackboard)
         {
-            _sharedBlackboard = sharedBlackboard;
-            _tree = new BehaviorTree(sharedBlackboard);
+            _selfBlackboard = selfBlackboard;
+            _tree = new BehaviorTree(selfBlackboard);
+            _pointers.Add(_tree.Root);
+        }
+
+        public BehaviorTreeBuilder(Blackboard selfBlackboard, List<Blackboard> sharedBlackboards)
+        {
+            _selfBlackboard = selfBlackboard;
+            _tree = new BehaviorTree(selfBlackboard, sharedBlackboards);
             _pointers.Add(_tree.Root);
         }
 

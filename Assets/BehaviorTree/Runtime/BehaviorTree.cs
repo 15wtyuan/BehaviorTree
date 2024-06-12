@@ -26,11 +26,19 @@ namespace BT.Runtime
         public string Name { get; set; }
         public TaskRoot Root { get; } = new TaskRoot();
         public IReadOnlyList<TaskBase> ActiveTasks => _activeTasks;
-        public Blackboard SharedBlackboard { get; }
+        public Blackboard SelfBlackboard { get; }
+        public List<Blackboard> SharedBlackboards;
 
-        public BehaviorTree(Blackboard sharedBlackboard)
+        public BehaviorTree(Blackboard selfBlackboard, List<Blackboard> sharedBlackboards)
         {
-            SharedBlackboard = sharedBlackboard;
+            SelfBlackboard = selfBlackboard;
+            SharedBlackboards = sharedBlackboards;
+            SyncNodes(Root);
+        }
+
+        public BehaviorTree(Blackboard selfBlackboard)
+        {
+            SelfBlackboard = selfBlackboard;
             SyncNodes(Root);
         }
 
@@ -97,7 +105,8 @@ namespace BT.Runtime
         {
             parent.AddChild(child);
             child.Tree = this;
-            child.SharedBlackboard = SharedBlackboard;
+            child.SelfBlackboard = SelfBlackboard;
+            child.SharedBlackboards = SharedBlackboards;
         }
 
         public void Splice(TaskParentBase parent, BehaviorTree tree)
@@ -109,12 +118,14 @@ namespace BT.Runtime
 
         private void SyncNodes(TaskParentBase taskParent)
         {
-            taskParent.SharedBlackboard = SharedBlackboard;
+            taskParent.SelfBlackboard = SelfBlackboard;
+            taskParent.SharedBlackboards = SharedBlackboards;
             taskParent.Tree = this;
 
             foreach (var child in taskParent.Children)
             {
-                child.SharedBlackboard = SharedBlackboard;
+                child.SelfBlackboard = SelfBlackboard;
+                child.SharedBlackboards = SharedBlackboards;
                 child.Tree = this;
 
                 if (child is TaskParentBase parent)
@@ -136,7 +147,7 @@ namespace BT.Runtime
 
         public string GetSharedBlackboardPrint()
         {
-            return SharedBlackboard.GetSharedVariablePrint();
+            return SelfBlackboard.GetSharedVariablePrint();
         }
     }
 }

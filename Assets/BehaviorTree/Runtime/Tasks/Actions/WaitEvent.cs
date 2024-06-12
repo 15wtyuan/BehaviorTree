@@ -35,12 +35,12 @@ namespace BT.Runtime
 
         protected override void OnStart()
         {
-            SharedBlackboard.AddObserver(EventType.Value, this);
+            SelfBlackboard.AddObserver(EventType.Value, this);
         }
 
         protected override void OnExit()
         {
-            SharedBlackboard.RemoveObserver(EventType.Value, this);
+            SelfBlackboard.RemoveObserver(EventType.Value, this);
         }
 
         protected override void OnReset()
@@ -68,7 +68,7 @@ namespace BT.Runtime
             else if (properties.TryGetValue("b_eventType", out value))
             {
                 var strValue = MiniJsonHelper.ParseString(value);
-                EventType = SharedBlackboard.Get<SharedString>(strValue);
+                EventType = SelfBlackboard.Get<SharedString>(strValue);
             }
         }
     }
