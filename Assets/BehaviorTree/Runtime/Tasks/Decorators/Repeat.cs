@@ -7,12 +7,12 @@ namespace BT.Runtime
         public static BehaviorTreeBuilder RepeatForever(this BehaviorTreeBuilder builder,
             string name = "Repeat Forever")
         {
-            return builder.ParentTask<RepeatForever>(name);
+            return builder.ParentTask<Repeat>(name);
         }
     }
 
     [TaskIcon("Repeat.png")]
-    public class RepeatForever : DecoratorBase, IJsonDeserializer
+    public class Repeat : DecoratorBase, IJsonDeserializer
     {
         protected override TaskStatus OnUpdate()
         {
