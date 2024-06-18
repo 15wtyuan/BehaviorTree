@@ -4,6 +4,6 @@ namespace BT.Runtime
 {
     public interface IJsonDeserializer
     {
-        void BuildFromJson(Dictionary<string, object> jsonData);
+        void BuildFromJson(string title, Dictionary<string, object> properties);
     }
 }

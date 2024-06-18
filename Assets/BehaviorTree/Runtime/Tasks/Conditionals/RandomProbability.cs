@@ -48,33 +48,28 @@ namespace BT.Runtime
             return randomValue < SuccessProbability.Value;
         }
 
-        public void BuildFromJson(Dictionary<string, object> jsonData)
+        public void BuildFromJson(string title, Dictionary<string, object> properties)
         {
-            Name = (string)jsonData["title"];
+            Name = title;
 
-            var properties = jsonData["properties"] as Dictionary<string, object>;
             Debug.Assert(properties != null, nameof(properties) + " != null");
 
             if (properties.TryGetValue("successProbability", out var value))
             {
-                var floatValue = MiniJsonHelper.ParseFloat(value);
-                SuccessProbability = floatValue;
+                SuccessProbability = MiniJsonHelper.ParseFloat(value);
             }
             else if (properties.TryGetValue("b_successProbability", out value))
             {
-                var strValue = MiniJsonHelper.ParseString(value);
-                SuccessProbability = SelfBlackboard.Get<SharedFloat>(strValue);
+                SuccessProbability = SelfBlackboard.Get<SharedFloat>(MiniJsonHelper.ParseString(value));
             }
 
             if (properties.TryGetValue("seed", out var value2))
             {
-                var intValue = MiniJsonHelper.ParseInt(value2);
-                Seed = intValue;
+                Seed = MiniJsonHelper.ParseInt(value2);
             }
             else if (properties.TryGetValue("b_seed", out value2))
             {
-                var strValue = MiniJsonHelper.ParseString(value2);
-                Seed = SelfBlackboard.Get<SharedInt>(strValue);
+                Seed = SelfBlackboard.Get<SharedInt>(MiniJsonHelper.ParseString(value2));
             }
         }
     }

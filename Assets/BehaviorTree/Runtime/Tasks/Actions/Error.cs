@@ -13,22 +13,19 @@ namespace BT.Runtime
             throw new Exception(Text.Value);
         }
 
-        public void BuildFromJson(Dictionary<string, object> jsonData)
+        public void BuildFromJson(string title, Dictionary<string, object> properties)
         {
-            Name = (string)jsonData["title"];
+            Name = title;
 
-            var properties = jsonData["properties"] as Dictionary<string, object>;
             Debug.Assert(properties != null, nameof(properties) + " != null");
 
             if (properties.TryGetValue("text", out var value))
             {
-                var strValue = MiniJsonHelper.ParseString(value);
-                Text = strValue;
+                Text = MiniJsonHelper.ParseString(value);
             }
             else if (properties.TryGetValue("b_text", out value))
             {
-                var strValue = MiniJsonHelper.ParseString(value);
-                Text = SelfBlackboard.Get<SharedString>(strValue);
+                Text = SelfBlackboard.Get<SharedString>(MiniJsonHelper.ParseString(value));
             }
         }
     }

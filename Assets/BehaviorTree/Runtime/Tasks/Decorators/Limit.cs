@@ -27,22 +27,19 @@ namespace BT.Runtime
             _loopTime = 0;
         }
 
-        public void BuildFromJson(Dictionary<string, object> jsonData)
+        public void BuildFromJson(string title, Dictionary<string, object> properties)
         {
-            Name = (string)jsonData["title"];
+            Name = title;
 
-            var properties = jsonData["properties"] as Dictionary<string, object>;
             Debug.Assert(properties != null, nameof(properties) + " != null");
 
             if (properties.TryGetValue("maxLoop", out var value))
             {
-                var intValue = MiniJsonHelper.ParseInt(value);
-                MaxLoop = intValue;
+                MaxLoop = MiniJsonHelper.ParseInt(value);
             }
             else if (properties.TryGetValue("b_maxLoop", out value))
             {
-                var strValue = MiniJsonHelper.ParseString(value);
-                MaxLoop = SelfBlackboard.Get<SharedInt>(strValue);
+                MaxLoop = SelfBlackboard.Get<SharedInt>(MiniJsonHelper.ParseString(value));
             }
         }
     }

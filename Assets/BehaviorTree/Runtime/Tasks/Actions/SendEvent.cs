@@ -32,22 +32,19 @@ namespace BT.Runtime
             return TaskStatus.Success;
         }
 
-        public void BuildFromJson(Dictionary<string, object> jsonData)
+        public void BuildFromJson(string title, Dictionary<string, object> properties)
         {
-            Name = (string)jsonData["title"];
+            Name = title;
 
-            var properties = jsonData["properties"] as Dictionary<string, object>;
             Debug.Assert(properties != null, nameof(properties) + " != null");
 
             if (properties.TryGetValue("eventType", out var value))
             {
-                var strValue = MiniJsonHelper.ParseString(value);
-                EventType = strValue;
+                EventType = MiniJsonHelper.ParseString(value);
             }
             else if (properties.TryGetValue("b_eventType", out value))
             {
-                var strValue = MiniJsonHelper.ParseString(value);
-                EventType = SelfBlackboard.Get<SharedString>(strValue);
+                EventType = SelfBlackboard.Get<SharedString>(MiniJsonHelper.ParseString(value));
             }
         }
     }

@@ -2,11 +2,10 @@
 
 namespace BT.Runtime
 {
-    public partial class BehaviorTreeBuilder
+    public class BehaviorTreeBuilder
     {
         private readonly BehaviorTree _tree;
         private readonly List<TaskParentBase> _pointers = new List<TaskParentBase>();
-        private readonly Blackboard _selfBlackboard;
 
         private TaskParentBase PointerCurrent
         {
@@ -17,16 +16,18 @@ namespace BT.Runtime
             }
         }
 
+        public Blackboard SelfBlackboard { get; }
+
         public BehaviorTreeBuilder(Blackboard selfBlackboard)
         {
-            _selfBlackboard = selfBlackboard;
+            SelfBlackboard = selfBlackboard;
             _tree = new BehaviorTree(selfBlackboard);
             _pointers.Add(_tree.Root);
         }
 
         public BehaviorTreeBuilder(Blackboard selfBlackboard, List<Blackboard> sharedBlackboards)
         {
-            _selfBlackboard = selfBlackboard;
+            SelfBlackboard = selfBlackboard;
             _tree = new BehaviorTree(selfBlackboard, sharedBlackboards);
             _pointers.Add(_tree.Root);
         }
@@ -55,6 +56,17 @@ namespace BT.Runtime
         public BehaviorTreeBuilder AddNode(TaskBase node)
         {
             _tree.AddNode(PointerCurrent, node);
+            return this;
+        }
+
+        public BehaviorTree GetCurTree()
+        {
+            return _tree;
+        }
+
+        public BehaviorTreeBuilder AddTreeFromJsonReader(IJsonReader reader)
+        {
+            reader.Add2Tree(this);
             return this;
         }
 

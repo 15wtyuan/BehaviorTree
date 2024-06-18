@@ -63,16 +63,16 @@ namespace BT.Samples
                 .End()
                 .Build();
             // @formatter:on
-            treeA.Start(true);
+            // treeA.Start(true);
 
 
             const string jsonFilePath = "JsonSamples";
             var jsonTextAsset = Resources.Load<TextAsset>(jsonFilePath);
             var jsonFileContent = jsonTextAsset.text;
             treeB = new BehaviorTreeBuilder(_sharedBlackboardB)
-                .AddTreeFromJson(jsonFileContent)
+                .AddTreeFromJsonReader(new Behavior3EditorJsonReader(jsonFileContent))
                 .Build();
-            // treeB.Start(true);
+            treeB.Start(true);
 
             // StartCoroutine(PerformanceTesting());
         }
@@ -81,18 +81,18 @@ namespace BT.Samples
         {
             if (isAirborne)
             {
-                _sharedBlackboardA.SendEvent("Airborne");
+                // _sharedBlackboardA.SendEvent("Airborne");
                 _sharedBlackboardB.SendEvent("Airborne");
                 isAirborne = false;
             }
 
-            treeA.Tick();
+            // treeA.Tick();
             treeB.Tick();
 
-            foreach (var tree in _trees)
-            {
-                tree.Tick();
-            }
+            // foreach (var tree in _trees)
+            // {
+            //     tree.Tick();
+            // }
         }
 
         private IEnumerator PerformanceTesting()
@@ -100,12 +100,12 @@ namespace BT.Samples
             yield return new WaitForSeconds(2f);
             const string jsonFilePath = "JsonSamples";
             var jsonTextAsset = Resources.Load<TextAsset>(jsonFilePath);
-            var dict = Json.Deserialize(jsonTextAsset.text) as Dictionary<string, object>;
+            var reader = new Behavior3EditorJsonReader(jsonTextAsset.text);
 
             for (int i = 0; i < 100; i++)
             {
                 var tree = new BehaviorTreeBuilder(new Blackboard())
-                    .AddTreeFromJson(dict)
+                    .AddTreeFromJsonReader(reader)
                     .Build();
                 tree.Start(true);
                 _trees.Add(tree);

@@ -9,9 +9,9 @@ namespace BT.Runtime
             return TaskStatus.Failure;
         }
 
-        public void BuildFromJson(Dictionary<string, object> jsonData)
+        public void BuildFromJson(string title, Dictionary<string, object> properties)
         {
-            Name = (string)jsonData["title"];
+            Name = title;
         }
     }
 }

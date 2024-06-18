@@ -61,24 +61,20 @@ namespace BT.Runtime
             return TaskStatus.Success;
         }
 
-        public void BuildFromJson(Dictionary<string, object> jsonData)
+        public void BuildFromJson(string title, Dictionary<string, object> properties)
         {
-            Name = (string)jsonData["title"];
+            Name = title;
 
-            var properties = jsonData["properties"] as Dictionary<string, object>;
             Debug.Assert(properties != null, nameof(properties) + " != null");
 
             if (properties.TryGetValue("milliseconds", out var value))
             {
-                var intValue = MiniJsonHelper.ParseInt(value);
-                Milliseconds = intValue;
-
-                Name = Name.Replace("<milliseconds>", $"{intValue}");
+                Milliseconds = MiniJsonHelper.ParseInt(value);
+                Name = Name.Replace("<milliseconds>", $"{Milliseconds.Value}");
             }
             else if (properties.TryGetValue("b_milliseconds", out value))
             {
-                var strValue = MiniJsonHelper.ParseString(value);
-                Milliseconds = SelfBlackboard.Get<SharedInt>(strValue);
+                Milliseconds = SelfBlackboard.Get<SharedInt>(MiniJsonHelper.ParseString(value));
             }
         }
     }
