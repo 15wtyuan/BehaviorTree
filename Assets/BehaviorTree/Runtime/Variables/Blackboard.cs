@@ -13,11 +13,23 @@ namespace BT.Runtime
         {
             if (_data.TryGetValue(key, out var oldValue))
             {
-                oldValue.SetValue(value);
+                oldValue.SetValue(value.GetValue());
             }
             else
             {
                 _data[key] = value;
+            }
+        }
+
+        public void SetValue(string key, object value)
+        {
+            if (_data.TryGetValue(key, out var oldValue))
+            {
+                oldValue.SetValue(value);
+            }
+            else
+            {
+                throw new Exception($"key:{key} not found, please init key first");
             }
         }
 
@@ -28,7 +40,7 @@ namespace BT.Runtime
                 return sharedVariable;
             }
 
-            throw new ArgumentNullException($"key:{key} not found");
+            throw new Exception($"key:{key} not found, please init key first");
         }
 
         public void AddObserver(string eventType, IEventObserver observer)

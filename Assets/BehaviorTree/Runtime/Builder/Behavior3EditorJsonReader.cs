@@ -97,6 +97,7 @@ namespace BT.Runtime
             Debug.Assert(curNode != null, nameof(curNode) + " != null");
             var name = (string)curNode["name"];
             var task = CreateNodeInstance(name);
+            ((TaskBase)task).SelfBlackboard = tree.SelfBlackboard;
 
             var title = (string)curNode["title"];
             var properties = curNode["properties"] as Dictionary<string, object>;
