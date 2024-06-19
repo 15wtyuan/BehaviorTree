@@ -75,7 +75,7 @@ namespace BT.Runtime
             var sharedStr = "";
             foreach (var item in _data)
             {
-                sharedStr += $"{item.Key}:{item.Value.GetValue()}  \n";
+                sharedStr += $"{item.Key}:{item.Value}\n";
             }
 
             return sharedStr;

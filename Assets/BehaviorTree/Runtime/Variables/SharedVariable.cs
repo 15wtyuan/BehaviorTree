@@ -5,6 +5,8 @@
         public abstract object GetValue();
 
         public abstract void SetValue(object value);
+
+        public abstract override string ToString();
     }
 
     public abstract class SharedVariable<T> : SharedVariable
