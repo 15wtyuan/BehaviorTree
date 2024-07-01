@@ -70,7 +70,7 @@ namespace BT.Samples
             var jsonTextAsset = Resources.Load<TextAsset>(jsonFilePath);
             var jsonFileContent = jsonTextAsset.text;
             treeB = new BehaviorTreeBuilder(_sharedBlackboardB)
-                .AddTreeFromJsonReader(new Behavior3EditorJsonReader(jsonFileContent))
+                .AddTreeFromJsonReader(new Behavior3EditorCnJsonReader(jsonFileContent))
                 .Build();
             treeB.Start(true);
 

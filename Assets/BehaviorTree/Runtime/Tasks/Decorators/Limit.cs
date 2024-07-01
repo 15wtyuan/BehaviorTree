@@ -39,7 +39,16 @@ namespace BT.Runtime
             }
             else if (properties.TryGetValue("b_maxLoop", out value))
             {
-                MaxLoop = SelfBlackboard.Get<SharedInt>(MiniJsonHelper.ParseString(value));
+                var key = MiniJsonHelper.ParseString(value);
+                if (SelfBlackboard.ContainsKey(key))
+                {
+                    MaxLoop = SelfBlackboard.Get<SharedInt>(key);
+                }
+                else
+                {
+                    MaxLoop = 0;
+                    SelfBlackboard.Set(key, MaxLoop);
+                }
             }
         }
     }

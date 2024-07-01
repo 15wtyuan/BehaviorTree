@@ -44,7 +44,16 @@ namespace BT.Runtime
             }
             else if (properties.TryGetValue("b_eventType", out value))
             {
-                EventType = SelfBlackboard.Get<SharedString>(MiniJsonHelper.ParseString(value));
+                var key = MiniJsonHelper.ParseString(value);
+                if (SelfBlackboard.ContainsKey(key))
+                {
+                    EventType = SelfBlackboard.Get<SharedString>(key);
+                }
+                else
+                {
+                    EventType = "";
+                    SelfBlackboard.Set(key, EventType);
+                }
             }
         }
     }

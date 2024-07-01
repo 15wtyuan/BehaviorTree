@@ -9,6 +9,11 @@ namespace BT.Runtime
 
         private readonly Dictionary<string, EventSubject> _events = new Dictionary<string, EventSubject>();
 
+        public bool ContainsKey(string key)
+        {
+            return _data.ContainsKey(key);
+        }
+
         public void Set<T>(string key, T value) where T : SharedVariable
         {
             if (_data.TryGetValue(key, out var oldValue))
@@ -79,6 +84,12 @@ namespace BT.Runtime
             }
 
             return sharedStr;
+        }
+
+        public void Clear()
+        {
+            _data.Clear();
+            _events.Clear();
         }
     }
 }

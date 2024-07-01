@@ -60,7 +60,16 @@ namespace BT.Runtime
             }
             else if (properties.TryGetValue("b_successProbability", out value))
             {
-                SuccessProbability = SelfBlackboard.Get<SharedFloat>(MiniJsonHelper.ParseString(value));
+                var key = MiniJsonHelper.ParseString(value);
+                if (SelfBlackboard.ContainsKey(key))
+                {
+                    SuccessProbability = SelfBlackboard.Get<SharedFloat>(key);
+                }
+                else
+                {
+                    SuccessProbability = 0;
+                    SelfBlackboard.Set(key, SuccessProbability);
+                }
             }
 
             if (properties.TryGetValue("seed", out var value2))
@@ -69,7 +78,16 @@ namespace BT.Runtime
             }
             else if (properties.TryGetValue("b_seed", out value2))
             {
-                Seed = SelfBlackboard.Get<SharedInt>(MiniJsonHelper.ParseString(value2));
+                var key = MiniJsonHelper.ParseString(value);
+                if (SelfBlackboard.ContainsKey(key))
+                {
+                    Seed = SelfBlackboard.Get<SharedInt>(key);
+                }
+                else
+                {
+                    Seed = 0;
+                    SelfBlackboard.Set(key, Seed);
+                }
             }
         }
     }

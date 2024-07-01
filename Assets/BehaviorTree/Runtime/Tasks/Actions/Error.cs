@@ -25,7 +25,16 @@ namespace BT.Runtime
             }
             else if (properties.TryGetValue("b_text", out value))
             {
-                Text = SelfBlackboard.Get<SharedString>(MiniJsonHelper.ParseString(value));
+                var key = MiniJsonHelper.ParseString(value);
+                if (SelfBlackboard.ContainsKey(key))
+                {
+                    Text = SelfBlackboard.Get<SharedString>(key);
+                }
+                else
+                {
+                    Text = "";
+                    SelfBlackboard.Set(key, Text);
+                }
             }
         }
     }
